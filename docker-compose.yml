@@ -7,6 +7,8 @@ services:
       - "3000:3000"
     links:
       - database
+    volumes:
+      - .:/home/app/
   database:
     container_name: postgres-db
     restart: on-failure

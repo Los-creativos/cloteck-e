@@ -6,8 +6,8 @@ WORKDIR /home/app
 
 COPY . .
 
-EXPOSE 3000
+RUN npm install
 
-RUN npm i
+EXPOSE 3000
 
 CMD ["npm", "run", "dev"]
