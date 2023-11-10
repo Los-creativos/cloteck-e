@@ -4,11 +4,11 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
   req: NextApiRequest,
-  { params }: { params: { productId: string }; }
+  { params }: { params: { id: string }; }
 ) {
   const uniqueProduct = await prisma.product.findUnique({
     where: {
-      product_id: parseInt(params.productId)
+      product_id: parseInt(params.id)
     },
   });
 
@@ -17,11 +17,11 @@ export async function GET(
 
 export async function DELETE(
   req: NextApiRequest,
-  { params }: { params: { productId: string }; }
+  { params }: { params: { id: string }; }
 ) {
   await prisma.product.delete({
     where: {
-      product_id: parseInt(params.productId)
+      product_id: parseInt(params.id)
     },
   });
 
@@ -30,12 +30,12 @@ export async function DELETE(
 
 export async function PUT(
   req: { json: () => any; },
-  { params }: { params: { productId: string }; }
+  { params }: { params: { id: string }; }
 ) {
   const data = await req.json();
   await prisma.product.update({
     where: {
-      product_id: parseInt(params.productId)
+      product_id: parseInt(params.id)
     },
     data: {
       name: data.name,
