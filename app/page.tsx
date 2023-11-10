@@ -1,5 +1,15 @@
-import Image from 'next/image'
+import React from 'react';
+import { GetStaticProps } from 'next';
+import Footer from './components/footer';
 
-export default function Home() {
-  return <div></div>
-}
+const Home = () => {
+  
+ return (
+    <div className="flex flex-col min-h-screen">
+      {}
+      <Footer /> {}
+    </div>
+ );
+};
+
+export default Home;
