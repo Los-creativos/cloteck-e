@@ -1,4 +1,4 @@
-export default function InputWithTItle({
+export default function InputWithTItle ({
   title,
   placeholder,
   type,

@@ -1,4 +1,6 @@
-export default function CategoryDisplay({
+import { ReactNode } from 'react'
+
+export default function CategoryDisplay ({
   CategoryName = 'CATEGORY NAME',
   Description = 'Description',
   Edit = 'EDIT',
@@ -6,8 +8,8 @@ export default function CategoryDisplay({
 }: {
   CategoryName?: String;
   Description?: String;
-  Edit?: String | React.ReactNode;
-  Remove?: String | React.ReactNode;
+  Edit?: String | ReactNode;
+  Remove?: String | ReactNode;
 }) {
   return (
     <div className='grid grid-cols-7 gap-4 mx-auto text-center font-semibold text-lg'>
@@ -16,5 +18,5 @@ export default function CategoryDisplay({
       <div className='flex col-span-1 justify-center items-center'>{Edit}</div>
       <div className='flex col-span-1 justify-center items-center'>{Remove}</div>
     </div>
-  );
+  )
 }
