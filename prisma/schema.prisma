@@ -23,10 +23,8 @@ model Product {
   description     String            @db.VarChar(200)
   price           Int
   image           String?           @db.Char(100)
-  quantity        Int
   ProductCategory ProductCategory[]
-  ProductSize     ProductSize[]
-  ProductColor    ProductColor[]
+  Attribute       Attribute[]
   Order           Order[]
 }
 
@@ -46,31 +44,26 @@ model ProductCategory {
 }
 
 model Size {
-  size_id     Int           @id @default(autoincrement())
-  name        String        @db.VarChar(50)
-  ProductSize ProductSize[]
-}
-
-model ProductSize {
-  product_size_id Int     @id @default(autoincrement())
-  product_id      Int
-  size_id         Int
-  product         Product @relation(fields: [product_id], references: [product_id])
-  size            Size    @relation(fields: [size_id], references: [size_id])
+  size_id   Int         @id @default(autoincrement())
+  name      String      @db.VarChar(50)
+  Attribute Attribute[]
 }
 
 model Color {
-  color_id     Int            @id @default(autoincrement())
-  name         String         @db.VarChar(50)
-  ProductColor ProductColor[]
+  color_id  Int         @id @default(autoincrement())
+  name      String      @db.VarChar(50)
+  Attribute Attribute[]
 }
 
-model ProductColor {
-  product_color_id Int     @id @default(autoincrement())
-  product_id       Int
-  color_id         Int
-  product          Product @relation(fields: [product_id], references: [product_id])
-  color            Color   @relation(fields: [color_id], references: [color_id])
+model Attribute {
+  attribute_id Int     @id @default(autoincrement())
+  product_id   Int
+  size_id      Int?
+  color_id     Int?
+  quantity     Int
+  product      Product @relation(fields: [product_id], references: [product_id])
+  size         Size?   @relation(fields: [size_id], references: [size_id])
+  color        Color?  @relation(fields: [color_id], references: [color_id])
 }
 
 model Order {
