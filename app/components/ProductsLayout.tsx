@@ -25,17 +25,16 @@ export default function ProductsLayout() {
     <>
     {products.map((product, i) => {
       return (
-        <ProductDisplay 
-          key={i} 
+        <><ProductDisplay
+          key={i}
           ProductName={product.name}
           Price={product.price}
           Category={product.ProductCategory[0].category.name}
-          Color={product.ProductColor[0].color.name}
-          Size={product.ProductSize[0].size.name}
-          Edit={<Button className='bg-transparent w-100'><Image src={editIcon} alt="asd"/></Button>}
-          Remove={<Button className='bg-transparent w-100'><Image src={canIcon} alt="asd"/></Button>}
-
-        />
+          Color={product.Attribute[0].color.name}
+          Size={product.Attribute[0].size.name}
+          Edit={<Button className='bg-transparent w-100'><Image src={editIcon} alt="asd" /></Button>}
+          Remove={<Button className='bg-transparent w-100'><Image src={canIcon} alt="asd" /></Button>} />
+          </>
       )
     })}
     </>
