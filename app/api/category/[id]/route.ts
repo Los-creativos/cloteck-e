@@ -1,6 +1,6 @@
-import {prisma} from "@/lib/prisma";
-import {NextApiRequest} from "next";
-import {NextResponse} from "next/server";
+import { prisma } from '@/lib/prisma'
+import { NextApiRequest } from 'next'
+import { NextResponse } from 'next/server'
 
 export async function GET (
   req: NextApiRequest,
@@ -13,10 +13,10 @@ export async function GET (
   const uniqueCategory = await prisma.category.findUnique({
     where: {
       category_id: parseInt(params.id)
-    },
-  });
+    }
+  })
 
-  return NextResponse.json(uniqueCategory);
+  return NextResponse.json(uniqueCategory)
 }
 
 export async function DELETE (
@@ -30,10 +30,10 @@ export async function DELETE (
   await prisma.category.delete({
     where: {
       category_id: parseInt(params.id)
-    },
-  });
+    }
+  })
 
-  return NextResponse.json("Successful Category Deleted");
+  return NextResponse.json('Successful Category Deleted')
 }
 
 export async function PUT (
@@ -44,7 +44,7 @@ export async function PUT (
     params: { id: string };
   }
 ) {
-  const data = await req.json();
+  const data = await req.json()
   await prisma.category.update({
     where: {
       category_id: parseInt(params.id)
@@ -53,7 +53,7 @@ export async function PUT (
       name: data.name,
       description: data.description
     }
-  });
+  })
 
-  return NextResponse.json("Successful Category Updated");
+  return NextResponse.json('Successful Category Updated')
 }

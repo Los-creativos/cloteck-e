@@ -1,57 +1,57 @@
 import { Prisma, Product } from '@prisma/client'
-import {prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
-export const createProduct = async (input: Prisma.ProductCreateInput) =>{
+export const createProduct = async (input: Prisma.ProductCreateInput) => {
   return await prisma.product.create({
-    data: input,
+    data: input
   }) as Product
 }
 
 export const findProduct = async (
   where: Partial<Prisma.ProductWhereInput>,
-  select?: Prisma.ProductSelect,
+  select?: Prisma.ProductSelect
 ) => {
   return await prisma.product.findFirst({
     where,
-    select,
+    select
   }) as Product
 }
 
 export const findUniqueProduct = async (
   where: Prisma.ProductWhereUniqueInput,
-  select?: Prisma.ProductSelect,
+  select?: Prisma.ProductSelect
 ) => {
   return await prisma.product.findUnique({
     where,
-    select,
+    select
   }) as Product
 }
 
 export const findAllProducts = async (
-  page: number, limit: number,
+  page: number, limit: number
 ) => {
-  const take = limit || 10;
+  const take = limit || 10
   const skip = (page - 1) * limit
   return await prisma.product.findMany({
     skip,
-    take,
+    take
   }) as Product[]
 }
 
 export const updateProduct = async (
   where: Prisma.ProductWhereUniqueInput,
-  data: Prisma.ProductUpdateInput,
+  data: Prisma.ProductUpdateInput
 ) => {
   return await prisma.product.update({
     where,
-    data,
+    data
   }) as Product
 }
 
 export const deleteProduct = async (
-  where: Prisma.ProductWhereUniqueInput,
+  where: Prisma.ProductWhereUniqueInput
 ) => {
   return await prisma.product.delete({
-    where,
+    where
   }) as Product
-} 
+}
