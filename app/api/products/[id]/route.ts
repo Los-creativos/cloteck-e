@@ -1,9 +1,8 @@
-import { NextApiRequest } from 'next'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
 export async function GET (
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { id: string }; }
 ) {
   const uniqueProduct = await prisma.product.findUnique({
@@ -16,7 +15,7 @@ export async function GET (
 }
 
 export async function DELETE (
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { id: string }; }
 ) {
   await prisma.product.delete({
@@ -29,7 +28,7 @@ export async function DELETE (
 }
 
 export async function PUT (
-  req: { json: () => any; },
+  req: NextRequest,
   { params }: { params: { id: string }; }
 ) {
   const data = await req.json()
