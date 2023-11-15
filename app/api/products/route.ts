@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { createProductSchema } from './product.schema'
 
@@ -22,7 +22,7 @@ export async function GET () {
   return NextResponse.json(products)
 }
 
-export async function POST (request: { json: () => any; }) {
+export async function POST (request: NextRequest) {
   try {
     const data = await request.json()
 

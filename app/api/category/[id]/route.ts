@@ -1,11 +1,10 @@
 import { prisma } from '@/lib/prisma'
-import { NextApiRequest } from 'next'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { updateCategoryValidator } from '@/app/api/category/category.schema'
 import { ZodError } from 'zod'
 
 export async function GET (
-  req: NextApiRequest,
+  req: NextRequest,
   {
     params
   }: {
@@ -30,7 +29,7 @@ export async function GET (
 }
 
 export async function DELETE (
-  req: NextApiRequest,
+  req: NextRequest,
   {
     params
   }: {
@@ -47,7 +46,7 @@ export async function DELETE (
 }
 
 export async function PUT (
-  req: { json: () => any; },
+  req: NextRequest,
   {
     params
   }: {
@@ -65,5 +64,5 @@ export async function PUT (
     }
   })
 
-  return NextResponse.json('Successful Category Updated')
+  return NextResponse.json({ message: 'Successful Category Updated' }, { status: 200 })
 }

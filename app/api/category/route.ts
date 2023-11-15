@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { createCategoryValidator } from '@/app/api/category/category.schema'
 import { ZodError } from 'zod'
@@ -16,7 +16,7 @@ export async function GET () {
   return NextResponse.json(categories)
 }
 
-export async function POST (request: { json: () => any; }) {
+export async function POST (request: NextRequest) {
   try {
     const data = await request.json()
     createCategoryValidator.parse(data)
