@@ -1,16 +1,18 @@
 import { NextResponse, NextRequest } from "next/server";
 import {prisma} from "@/lib/prisma";
-import { createCategoryValidator } from "./category.schema";
+import { createCategoryValidator } from '@/app/api/category/category.schema'
 import { ZodError } from "zod";
 
-export async function GET() {
-  const categories = await prisma.category.findMany({ include: {
+export async function GET () {
+  const categories = await prisma.category.findMany({
+    include: {
       ProductCategory: {
         include: {
           product: true
         }
-      },
-    }})
+      }
+    }
+  })
   return NextResponse.json(categories)
 }
 
@@ -30,10 +32,11 @@ export async function POST(req: NextRequest) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: (error as any).errors }, { status: 401 })
     }
+    return NextResponse.json({ error: (error as any).errors }, { status: 500 })
   }
 }
 
-export async function DELETE() {
+export async function DELETE () {
   await prisma.category.deleteMany()
   return NextResponse.json('Successful All items of Category')
 }

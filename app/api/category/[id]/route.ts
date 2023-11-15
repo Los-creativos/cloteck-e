@@ -54,8 +54,8 @@ export async function PUT(
     params: { id: string };
   }
 ) {
-  const data = await req.json();
-  updateCategoryValidator.parse(data);
+  const data = await req.json()
+  updateCategoryValidator.parse(data)
   await prisma.category.update({
     where: {
       category_id: parseInt(params.id)

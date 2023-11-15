@@ -16,15 +16,27 @@ export default function ProductsLayout () {
     fetchProducts()
   }, [])
 
+  const getCategoryNames = (categories: any[]) => {
+    return categories.map((category) => category.category.name).join(', ')
+  }
+
+  const getColorNames = (attributes: any[]) => {
+    return attributes.map((attribute) => attribute.color.name).join(', ')
+  }
+
+  const getSizeNames = (attributes: any[]) => {
+    return attributes.map((attribute) => attribute.size.name).join(', ')
+  }
+
   return (
     <div>
       <div className='hidden lg:grid grid-cols-7 gap-4 text-center font-semibold text-lg mb-2 py-4'>
         <div className='flex col-span-1 justify-center items-center'>
           Product Name
         </div>
+        <div className='flex col-span-1 justify-center items-center'>Size</div>
         <div className='flex col-span-1 justify-center items-center'>Color</div>
         <div className='flex col-span-1 justify-center items-center'>Price</div>
-        <div className='flex col-span-1 justify-center items-center'>Size</div>
         <div className='flex col-span-1 justify-center items-center'>
           Category
         </div>
@@ -35,14 +47,17 @@ export default function ProductsLayout () {
       </div>
       <>
         {products.map((product, i) => {
+          const categoryNames = getCategoryNames(product.ProductCategory)
+          const colorNames = getColorNames(product.Attribute)
+          const sizeNames = getSizeNames(product.Attribute)
           return (
             <Fragment key={i}>
               <ProductDisplay
                 ProductName={product.name}
                 Price={product.price}
-                Category={product.ProductCategory[0].category.name}
-                Color={product.Attribute[0].color.name}
-                Size={product.Attribute[0].size.name}
+                Category={categoryNames}
+                Color={colorNames}
+                Size={sizeNames}
                 Edit={
                   <Button className='bg-transparent'>
                     <svg
