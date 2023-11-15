@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
-import Nadvar from './components/Navbar'
 import { ReactNode } from 'react'
 
 export const metadata: Metadata = {
@@ -16,7 +15,6 @@ export default function RootLayout ({
   return (
     <html lang='en'>
       <body>
-        <Nadvar />
         <main>{children}</main>
       </body>
     </html>

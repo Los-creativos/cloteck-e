@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 
 export default function CategoryDisplay ({
-  CategoryName = 'CATEGORY NAME',
-  Description = 'Description',
-  Edit = 'EDIT',
-  Remove = 'REMOVE'
+  CategoryName,
+  Description,
+  Edit,
+  Remove
 }: {
   CategoryName?: String;
   Description?: String;
