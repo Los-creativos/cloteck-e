@@ -1,14 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import {prisma} from "@/lib/prisma";
-import {NextApiRequest, NextApiResponse} from "next";
 
 export async function GET() {
   const category = await prisma.category.findMany();
   return NextResponse.json(category);
 }
 
-export async function POST(request: { json: () => any; }) {
-  const data = await request.json();
+export async function POST(req: NextRequest) {
+  const data = await req.json();
   await prisma.category.create({
     data: {
       name: data.name,
