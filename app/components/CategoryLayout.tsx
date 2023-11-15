@@ -7,12 +7,27 @@ import CategoryDisplay from './CategoryDisplay'
 export default function CategoryLayout () {
   const [categories, setCategories] = useState<any[]>([])
 
-  useEffect(() => {
-    const fetchCategories = () => {
-      fetch('/api/category')
-        .then(response => response.json())
-        .then(data => setCategories(data))
+  const handleOnClickk = async (id: number) => {
+    try {
+      const response = await fetch(`/api/category/${id}`, {
+        method: 'DELETE'
+      })
+      if (response.ok) {
+        fetchCategories()
+      }
+    } catch (error) {
+      console.error('Error:', error)
     }
+  }
+
+  const fetchCategories = () => {
+    fetch('/api/category')
+      .then(response => response.json())
+      .then(data => setCategories(data))
+      .catch(error => console.error('Error fetching categories:', error))
+  }
+
+  useEffect(() => {
     fetchCategories()
   }, [])
 
@@ -25,10 +40,10 @@ export default function CategoryLayout () {
         <div className='flex col-span-1 justify-center items-center'>Remove</div>
       </div>
       <>
-        {categories.map((category, i) => {
+        {categories.map((category) => {
           return (
             <CategoryDisplay
-              key={i}
+              key={category.category_id}
               CategoryName={category.name}
               Description={category.description}
               Edit={
@@ -44,7 +59,7 @@ export default function CategoryLayout () {
                 </Button>
               }
               Remove={
-                <Button className='bg-transparent'>
+                <Button className='bg-transparent' onClick={() => handleOnClickk(category.category_id)}>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     width='24'
