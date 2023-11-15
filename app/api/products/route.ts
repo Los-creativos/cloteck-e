@@ -35,31 +35,39 @@ export async function POST (request: { json: () => any; }) {
         price: data.price,
         image: data.image,
         ProductCategory: {
-          create: {
+          create: data.ProductCategory.map((category: { category_id: any }) => ({
             category: {
-              connect: {
-                category_id: data.ProductCategory[0].category_id
-              }
+              connect: { category_id: category.category_id }
             }
+          }))
+        },
+        Attribute: {
+          create: data.Attribute.map((attribute: { size_id: any; color_id: any; quantity: any }) => ({
+            size: {
+              connect: { size_id: attribute.size_id }
+            },
+            color: {
+              connect: { color_id: attribute.color_id }
+            },
+            quantity: attribute.quantity
+          }))
+        }
+      },
+      include: {
+        ProductCategory: {
+          include: {
+            category: true
           }
         },
         Attribute: {
-          create: {
-            size: {
-              connect: {
-                size_id: data.Attribute[0].size_id
-              }
-            },
-            color: {
-              connect: {
-                color_id: data.Attribute[0].color_id
-              }
-            },
-            quantity: data.Attribute[0].quantity
+          include: {
+            size: true,
+            color: true
           }
         }
       }
     })
+
     return NextResponse.json(createdProduct)
   } catch (error) {
     console.error('Error', error)

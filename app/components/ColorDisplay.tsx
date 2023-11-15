@@ -1,4 +1,4 @@
-export default function ColorDisplay ({ hexColor, diameter }: {hexColor: string, diameter: number}) {
+export default function ColorDisplay ({ hexColor, diameter }: {hexColor: any, diameter: number}) {
   const style = {
     width: `${diameter}px`,
     height: `${diameter}px`,
