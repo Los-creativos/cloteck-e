@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma'
 import {updateCategoryValidator} from '@/app/api/category/category.schema'
 import {ZodError} from 'zod'
 
-export async function GET(
+export async function GET (
   req: NextRequest,
   {
     params
@@ -46,7 +46,7 @@ export async function DELETE (
   return NextResponse.json('Successful Category Deleted')
 }
 
-export async function PUT(
+export async function PUT (
   req: NextRequest,
   {
     params
@@ -65,5 +65,5 @@ export async function PUT(
     }
   })
 
-  return NextResponse.json('Successful Category Updated')
+  return NextResponse.json({ message: 'Successful Category Updated' }, { status: 200 })
 }

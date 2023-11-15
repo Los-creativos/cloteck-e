@@ -16,7 +16,7 @@ export async function GET () {
   return NextResponse.json(categories)
 }
 
-export async function POST(req: NextRequest) {
+export async function POST (req: NextRequest) {
   try {
     const data = await req.json()
     createCategoryValidator.parse(data)
