@@ -13,7 +13,7 @@ export default function AddCategory () {
     e.preventDefault()
 
     try {
-      await fetch('/api/category/', {
+      const response = await fetch('/api/category/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -23,6 +23,7 @@ export default function AddCategory () {
           description
         })
       })
+      response.ok ? alert('Category added successfully') : alert('Category not added')
     } catch (error) {
       console.error('Error:', error)
     }

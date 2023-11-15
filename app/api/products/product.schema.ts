@@ -1,45 +1,40 @@
 import { array, number, object, string, TypeOf } from 'zod'
 
 export const createProductSchema = object({
-  name: string(),
-  description: string(),
-  price: number(),
-  image: string(),
+  name: string()
+    .trim()
+    .min(4, 'Minimum of 4 characters required')
+    .max(50, 'Maximum characters are 50'),
+  description: string()
+    .trim()
+    .min(20, 'Minium of 20 characters required')
+    .max(200, 'Maximun characters are 200'),
+  price: number().positive('It should be a positive number').finite().safe(),
+  image: string()
+    .trim()
+    .min(10, 'Minuim of 10 characters required')
+    .max(100, 'Maxium characters are 100'),
   ProductCategory: array(
     object({
-      product_category_id: number(),
-      product_id: string(),
-      category_id: number(),
+      category_id: number().positive('It should be a positive number').finite(),
       category: object({
-        category_id: number(),
-        name: string(),
-        description: string()
+        category_id: number().positive('It should be a positive number').finite()
       })
     })
-  ),
+  ).nonempty(),
   Attribute: array(
     object({
-      attribute_id: number(),
-      product_id: string(),
-      size_id: number(),
-      color_id: number(),
-      quantity: number(),
+      size_id: number().positive('It should be a positive number').int(),
+      color_id: number().positive('It should be a positive number').int(),
+      quantity: number().int().positive('It should be a positive number'),
       size: object({
-        size_id: number(),
-        name: string()
+        size_id: number()
       }),
       color: object({
-        color_id: number(),
-        name: string()
+        color_id: number()
       })
     })
-  )
-}).refine((data) => data.price >= 0, {
-  message: 'Product price must be greater than or equal to 0',
-  path: ['price']
-}).refine((data) => data.Attribute.every((attr) => attr.quantity >= 0), {
-  message: 'Attribute quantity must be greater than or equal to 0 for all attributes',
-  path: ['Attribute', 'quantity']
+  ).nonempty()
 })
 
 export const updateProductSchema = object({
@@ -57,6 +52,6 @@ export const filterQuery = object({
   page: number().default(10)
 })
 
-export type CreateProductInput = TypeOf<typeof createProductSchema>
-export type UpdateProductInput = TypeOf<typeof updateProductSchema>
-export type FilterQueryInput = TypeOf<typeof filterQuery>
+export type CreateProductInput = TypeOf<typeof createProductSchema>;
+export type UpdateProductInput = TypeOf<typeof updateProductSchema>;
+export type FilterQueryInput = TypeOf<typeof filterQuery>;

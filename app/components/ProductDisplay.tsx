@@ -1,9 +1,10 @@
 import { ReactNode } from 'react'
+import ColorDisplay from './ColorDisplay'
 
 export default function ProductDisplay ({
   ProductName,
   Size,
-  Color,
+  Color = '',
   Price,
   Category,
   Edit,
@@ -11,7 +12,7 @@ export default function ProductDisplay ({
 }: {
   ProductName?: String;
   Size?: String;
-  Color?: String | ReactNode;
+  Color?: string | ReactNode & NonNullable<string>;
   Price?: String;
   Category?: String;
   Edit?: String | ReactNode;
@@ -25,7 +26,13 @@ export default function ProductDisplay ({
       <div className='lg:hidden font-semibold justify-center items-center'>Size</div>
       <div className='lg:hidden font-semibold justify-center items-center'>Colors</div>
       <div className='flex justify-center items-center'>{Size}</div>
-      <div className='flex justify-center items-center'>{Color}</div>
+      <div className='grid grid-flow-col items-center justify-center gap-3'>
+        {Color.split(', ').map((color, i) => {
+          return (
+            <div key={i} className='flex justify-center items-center'><ColorDisplay hexColor={color} diameter={15} /></div>
+          )
+        })}
+      </div>
       <div className='lg:hidden border-t border-stone-300 w-full col-span-2 my-4' />
       <div className='lg:hidden font-semibold justify-center items-center'>Price</div>
       <div className='lg:hidden font-semibold justify-center items-center'>Category</div>

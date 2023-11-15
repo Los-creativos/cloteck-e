@@ -3,15 +3,15 @@ import { prisma } from '@/lib/prisma'
 import { createCategoryValidator } from '@/app/api/category/category.schema'
 import { ZodError } from 'zod'
 
-export async function GET() {
+export async function GET () {
   const categories = await prisma.category.findMany({
     include: {
       ProductCategory: {
         include: {
-          product: true,
-        },
-      },
-    },
+          product: true
+        }
+      }
+    }
   })
   return NextResponse.json(categories)
 }
@@ -23,8 +23,8 @@ export async function POST(req: NextRequest) {
     await prisma.category.create({
       data: {
         name: data.name,
-        description: data.description,
-      },
+        description: data.description
+      }
     })
 
     return NextResponse.json('Successful category creation')
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function DELETE() {
+export async function DELETE () {
   await prisma.category.deleteMany()
   return NextResponse.json('Successful All items of Category')
 }
