@@ -1,11 +1,11 @@
-import React from 'react';
-import { GetStaticProps } from 'next';
+
+import '@testing-library/jest-dom';
 import Footer from './components/footer';
 
 const Home = () => {
   
  return (
-    <div className="flex flex-col min-h-screen">
+    <div  data-testid="home-container" className="flex flex-col min-h-screen">
       {}
       <Footer /> {}
     </div>
