@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import {prisma} from "@/lib/prisma";
+import {updateCategoryValidator} from "@/app/api/category/category.schema";
+import { ZodError } from "zod";
 
 export async function GET(
   req: NextRequest,
@@ -10,13 +12,21 @@ export async function GET(
     params: { id: string };
   }
 ) {
-  const uniqueCategory = await prisma.category.findUnique({
-    where: {
-      category_id: parseInt(params.id)
-    }
-  })
+  try {
+    const uniqueCategory = await prisma.category.findUnique({
+      where: {
+        category_id: parseInt(params.id)
+      }
+    })
 
-  return NextResponse.json(uniqueCategory)
+    return NextResponse.json(uniqueCategory)
+  } catch (error) {
+    console.error('Error', error)
+    if (error instanceof ZodError) {
+      return NextResponse.json({ error: (error as any).errors }, { status: 401 })
+    }
+    return NextResponse.json({ error: (error as any).errors }, { status: 500 })
+  }
 }
 
 export async function DELETE (
@@ -44,13 +54,13 @@ export async function PUT(
     params: { id: string };
   }
 ) {
-  const data = await req.json()
+  const data = await req.json();
+  updateCategoryValidator.parse(data);
   await prisma.category.update({
     where: {
       category_id: parseInt(params.id)
     },
     data: {
-      name: data.name,
       description: data.description
     }
   })
