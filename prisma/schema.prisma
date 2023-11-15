@@ -22,7 +22,7 @@ model Product {
   name            String            @db.VarChar(50)
   description     String            @db.VarChar(200)
   price           Int
-  image           String?           @db.Char(100)
+  image           String            @db.Char(100)
   ProductCategory ProductCategory[]
   Attribute       Attribute[]
   Order           Order[]
@@ -58,30 +58,22 @@ model Color {
 model Attribute {
   attribute_id Int     @id @default(autoincrement())
   product_id   Int
-  size_id      Int?
-  color_id     Int?
+  size_id      Int
+  color_id     Int
   quantity     Int
   product      Product @relation(fields: [product_id], references: [product_id])
-  size         Size?   @relation(fields: [size_id], references: [size_id])
-  color        Color?  @relation(fields: [color_id], references: [color_id])
+  size         Size    @relation(fields: [size_id], references: [size_id])
+  color        Color   @relation(fields: [color_id], references: [color_id])
 }
 
 model Order {
-  order_id         Int        @id @default(autoincrement())
+  order_id         Int      @id @default(autoincrement())
   product_id       Int
   user_id          Int
   product_quantity Int
-  date             DateTime   @default(now())
-  product          Product    @relation(fields: [product_id], references: [product_id])
-  customer         Customer   @relation(fields: [user_id], references: [customer_id])
-  Shipment         Shipment[]
-}
-
-model Shipment {
-  shipment_id  Int   @id @default(autoincrement())
-  order_id     Int
-  total_amount Int
-  order        Order @relation(fields: [order_id], references: [order_id])
+  date             DateTime @default(now())
+  product          Product  @relation(fields: [product_id], references: [product_id])
+  customer         Customer @relation(fields: [user_id], references: [customer_id])
 }
 
 model Region {
