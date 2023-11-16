@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import ColorDisplay from './ColorDisplay'
+import ColorDisplay from './admin/ColorDisplay'
 
 export default function ProductDisplay ({
   ProductName,
