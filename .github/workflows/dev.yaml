@@ -64,7 +64,7 @@ jobs:
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
       - name: Comment PR with Preview URL
         if: github.event_name == 'pull_request' && github.event.pull_request.merged == false
-        uses: unsplash/comment-on-pr@v1.2.0
+        uses: unsplash/comment-on-pr@v1.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
