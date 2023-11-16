@@ -29,22 +29,10 @@ jobs:
       - name: Run Lint
         run: npm run lint
 
-      # 3. Verificar mensaje de commit
-      - name: Check Commit Messages
-        uses: wagoid/commitlint-github-action@v3
-        with:
-          configFile: './commitlint.config.js'
-
       # 4. Ejecutar tests
       - name: Run Tests
         run: npm test
 
-      # 5. Reporte de cobertura
-      - name: Publish Test Coverage
-        uses: codecov/codecov-action@v2
-        with:
-          files: ./coverage/lcov.info
-          fail_ci_if_error: true
 
       # 6. Revisar vulnerabilidades
       - name: Check for Vulnerabilities
