@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useState } from 'react'
 import ProductDisplay from './ProductDisplay'
-import Button from './Button'
+import Button from './ui/Button'
 
 export default function ProductsLayout () {
   const [products, setProducts] = useState<any[]>([])
@@ -15,6 +15,7 @@ export default function ProductsLayout () {
     }
     fetchProducts()
   }, [])
+    
 
   const getCategoryNames = (categories: any[]) => {
     return categories.map((category) => category.category.name).join(', ')

@@ -1,5 +1,5 @@
 import Button from '@/app/components/Button'
-import CategoryLayout from '@/app/components/CategoryLayout'
+import CategoryLayout from '@/app/components/admin/CategoryLayout'
 import Link from 'next/link'
 
 export default function CategoryList () {
