@@ -7,7 +7,7 @@ const Footer = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <Fragment>
-    <footer className="bg-gray-900 text-white py-4 fixed bottom-0 w-full text-center">
+    <footer className="bg-gray-900 text-white py-4 bottom-0 w-full text-center">
       <p className="mb-2">Stay in the know</p>
       <div className="flex justify-center mb-2">
         <button className="mr-2" onClick={() => setShowModal(true)}> Info</button>
