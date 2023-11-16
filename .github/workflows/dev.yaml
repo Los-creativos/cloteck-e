@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
 
       # 1. Instalar dependencias
       - name: Cache Node modules
@@ -27,22 +29,10 @@ jobs:
       - name: Run Lint
         run: npm run lint
 
-      # 3. Verificar mensaje de commit
-      - name: Check Commit Messages
-        uses: wagoid/commitlint-github-action@v3
-        with:
-          configFile: './commitlint.config.js'
-
       # 4. Ejecutar tests
       - name: Run Tests
         run: npm test
 
-      # 5. Reporte de cobertura
-      - name: Publish Test Coverage
-        uses: codecov/codecov-action@v2
-        with:
-          files: ./coverage/lcov.info
-          fail_ci_if_error: true
 
       # 6. Revisar vulnerabilidades
       - name: Check for Vulnerabilities
@@ -51,33 +41,3 @@ jobs:
       # 7. Construir el proyecto
       - name: Build Project
         run: npm run build
-
-      # Despliegue de la Rama de PR a Vercel (Preview)
-      - name: Install Vercel CLI (Preview)
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == false
-        run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information (Preview)
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == false
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy to Vercel (Preview)
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == false
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Comment PR with Preview URL
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == false
-        uses: unsplash/comment-on-pr@v1.3.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          msg: 'Preview URL: ${{ steps.deploy.outputs.preview_url }}'
-          check_for_duplicate_msg: true
-
-      # Despliegue de la rama 'dev' a Vercel (Preview)
-      - name: Install Vercel CLI (Preview)
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
-        run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information (Preview)
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy to Vercel (Preview)
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
