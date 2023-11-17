@@ -1,12 +1,12 @@
 'use client'
-import { useRouter, useParams } from 'next/navigation'; // Import useParams
+import { useParams } from 'next/navigation'; 
 import React, { useEffect, useState } from 'react';
 import { Product } from '@/app/types';
 import Footer from '@/app/components/footer';
 import Nadvar from '@/app/components/ui/Navbar';
 
 const ProductDetailPage = () => {
-  const { id: productId } = useParams(); // Use useParams to get the dynamic route parameter
+  const { id: productId } = useParams(); 
 
   const [product, setProduct] = useState<Product | null>(null);
 
