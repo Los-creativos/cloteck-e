@@ -1,4 +1,4 @@
-import Button from '@/app/components/Button'
+import Button from '@/app/components/ui/Button'
 import CategoryLayout from '@/app/components/admin/CategoryLayout'
 import Link from 'next/link'
 

@@ -21,7 +21,6 @@ const TrendCarousel = () => {
   return (
     <div className="relative">
       <div className={`animated-bg ${trends[activeIndex].bg} h-64 flex items-center justify-center`}>
-        {/* Text and Button */}
         <div className="text-center">
           <h2 className="text-white text-4xl font-bold mb-4">{trends[activeIndex].text}</h2>
           <button className="bg-white text-gray-800 px-6 py-2 rounded shadow button-hover-effect">
@@ -31,10 +30,10 @@ const TrendCarousel = () => {
       </div>
       {/* Navigation Buttons */}
       <button onClick={goToPrevious} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 hover:bg-gray-100 transition duration-300">
-        &#8592; {/* Left arrow */}
+        &#8592; 
       </button>
       <button onClick={goToNext} className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 hover:bg-gray-100 transition duration-300">
-        &#8594; {/* Right arrow */}
+        &#8594;
       </button>
 
       <div className="absolute bottom-0 left-0 w-full flex justify-center p-4">
