@@ -6,10 +6,10 @@ export default function AdminHeader () {
       <nav className='flex justify-between items-center h-20 p-4'>
         <div className='flex place-items-baseline font-semibold md:gap-10 gap-2'>
           <h1 className='text-black md:text-3xl sm:text-xl m-4'>CLOTECK</h1>
-          <Link href='/admin-panel/product-list'>
+          <Link href='/admin-panel/product-list' prefetch={true}>
             <h1 className='md:text-base sm:text-sm text-xs'>PRODUCTS</h1>
           </Link>
-          <Link href='/admin-panel/category-list'>
+          <Link href='/admin-panel/category-list' prefetch={true}>
             <h1 className='md:text-base sm:text-sm text-xs'>CATEGORIES</h1>
           </Link>
         </div>
