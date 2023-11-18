@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import {prisma} from "@/lib/prisma";
-import { createCategoryValidator } from '@/app/api/category/category.schema'
+import { createCategoryValidator } from '@/app/(backend)/api/category/category.schema'
 import { ZodError } from "zod";
 
 export async function GET () {
