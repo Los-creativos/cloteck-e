@@ -48,7 +48,7 @@ export default function CategoryLayout () {
               CategoryName={category.name}
               Description={category.description}
               Edit={
-                <Link href={`/admin-panel/category-list/edit/${encodeURIComponent(JSON.stringify(category))}`}>
+                <Link href={`/admin/category/edit/${encodeURIComponent(JSON.stringify(category))}`}>
                   <Button className='bg-transparent'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'

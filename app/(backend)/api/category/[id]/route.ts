@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import {prisma} from "@/lib/prisma";
-import {updateCategoryValidator} from "@/app/api/category/category.schema";
+import {updateCategoryValidator} from "@/app/(backend)/api/category/category.schema";
 import { ZodError } from "zod";
 
 export async function GET(
