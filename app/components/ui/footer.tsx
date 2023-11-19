@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image';
 import React, { useState } from 'react';
-import Modal from './ui/Modal';
+import Modal from '@/app/components/ui/Modal';
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);

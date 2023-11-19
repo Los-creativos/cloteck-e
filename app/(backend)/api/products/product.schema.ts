@@ -1,4 +1,5 @@
-import { array, number, object, string, TypeOf } from 'zod'
+import { Prisma } from '@prisma/client';
+import { array, number, object, string, TypeOf, z } from 'zod'
 
 export const createProductSchema = object({
   name: string()
@@ -9,7 +10,7 @@ export const createProductSchema = object({
     .trim()
     .min(20, 'Minium of 20 characters required')
     .max(200, 'Maximun characters are 200'),
-  price: number().positive('It should be a positive number').finite().safe(),
+  price: z.instanceof(Prisma.Decimal).refine((price) => price.greaterThan('0.01')),
   image: string()
     .trim()
     .min(10, 'Minuim of 10 characters required')

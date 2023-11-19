@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useState } from 'react'
 import ProductDisplay from './ProductDisplay'
-import Button from './ui/Button'
+import Button from '@/app/components/ui/Button'
 
 export default function ProductsLayout () {
   const [products, setProducts] = useState<any[]>([])

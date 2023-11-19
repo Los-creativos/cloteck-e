@@ -37,10 +37,8 @@ export async function PUT (
       product_id: parseInt(params.id)
     },
     data: {
-      name: data.name,
       description: data.description,
-      price: data.price,
-      image: data.image
+
     }
   })
 
