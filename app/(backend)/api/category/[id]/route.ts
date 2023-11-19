@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import {prisma} from "@/lib/prisma";
 import {updateCategoryValidator} from "@/app/(backend)/api/category/category.schema";
-import { ZodError } from "zod";
+import { ZodError, z } from "zod";
 
 export async function GET(
   req: NextRequest,
@@ -55,15 +55,22 @@ export async function PUT (
   }
 ) {
   const data = await req.json()
-  updateCategoryValidator.parse(data)
-  await prisma.category.update({
-    where: {
-      category_id: parseInt(params.id)
-    },
-    data: {
-      description: data.description
-    }
-  })
+  try {
+    updateCategoryValidator.parse(data)
+    await prisma.category.update({
+      where: {
+        category_id: parseInt(params.id)
+      },
+      data: {
+        description: data.description
+      }
+    })
 
-  return NextResponse.json({ message: 'Successful Category Updated' }, { status: 200 })
+    return NextResponse.json({ message: 'Successful Category Updated' }, { status: 200 })
+  } catch (error) {
+    let err = error;
+    if (error instanceof z.ZodError) {
+    err = error.issues.map((e) => ({ path: e.path[0], message: e.message }))}
+    return NextResponse.json({error: err}, {status: 400})
+  }
 }

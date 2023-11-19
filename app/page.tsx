@@ -1,5 +1,5 @@
 import Navbar from './components/ui/Navbar';
-import Footer from './components/footer';
+import Footer from './components/ui/footer';
 import ProductList from './components/home/ProductLIst';
 import TrendCarousel from './components/home/TrendCarrousel';
 import AboutUs from './components/home/AboutUs';

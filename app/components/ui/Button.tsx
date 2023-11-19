@@ -11,13 +11,14 @@ export default function Button ({
   className?: String;
   onClick?: () => void;
   children?: ReactNode;
-  type?: string;
+  type?: "button" | "submit" | "reset" | undefined;
 }) {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`bg-black text-white font-bold py-2 px-4 rounded ${className}`}
-    >
+      >
       {text}
       {children}
     </button>

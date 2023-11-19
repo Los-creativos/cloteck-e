@@ -8,8 +8,8 @@ export default function CategoryDisplay ({
 }: {
   CategoryName?: String;
   Description?: String;
-  Edit?: String | ReactNode;
-  Remove?: String | ReactNode;
+  Edit?: ReactNode;
+  Remove?: ReactNode;
 }) {
   return (
     <div className='grid lg:grid-cols-7 shadow-inner lg:grid-rows-1 grid-cols-2 lg:gap-4 text-center items-center text-lg bg-zinc-200 bg-opacity-60 rounded-xl lg:mb-3 mb-5  py-4 lg:p-0 p-2'>
