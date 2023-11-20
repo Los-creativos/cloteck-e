@@ -23,12 +23,12 @@ const TrendCarousel = () => {
       <div className={`animated-bg ${trends[activeIndex].bg} h-64 flex items-center justify-center`}>
         <div className="text-center">
           <h2 className="text-white text-4xl font-bold mb-4">{trends[activeIndex].text}</h2>
-          <button className="bg-white text-gray-800 px-6 py-2 rounded shadow button-hover-effect">
+          <button className="relative bg-white text-gray-800 px-6 py-2 rounded shadow hover:bg-transparent hover:text-white transition duration-300 overflow-hidden button-animation">
             Shop Now
           </button>
+
         </div>
       </div>
-      {/* Navigation Buttons */}
       <button onClick={goToPrevious} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 hover:bg-gray-100 transition duration-300">
         &#8592; 
       </button>

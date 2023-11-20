@@ -25,7 +25,7 @@ export default function ProductList()  {
   const productsToShow = Array.isArray(products) ? products.slice(0, 9) : [];
 
     return (
-      <div className='flex items-center justify-center my-10 mb-10'>
+      <div className='flex items-center justify-center mb-10'>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {productsToShow.map((product) => (
           <ProductCard key={product.product_id} product={product} />

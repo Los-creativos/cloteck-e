@@ -220,3 +220,52 @@ a:hover::after {
 @media (min-width: 1024px) {
   /* Desktop-specific styles */
 }
+
+/* globals.css */
+@keyframes lineRun {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* globals.css */
+@keyframes lineRun {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  25% {
+    width: 100%;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 100%;
+  }
+  75% {
+    width: 0;
+    height: 100%;
+  }
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
+
+.button-animation::before {
+  content: '';
+  position: absolute;
+  top: -2px; /* Adjust border size */
+  left: -2px;
+  z-index: -1;
+  background: transparent;
+  width: calc(100% + 4px); /* Adjust based on border size */
+  height: calc(100% + 4px);
+  border: 2px solid black;
+  border-radius: inherit;
+  animation: lineRun 2s linear infinite;
+}
+
+.button-animation:hover::before {
+  animation: lineRun 2s linear infinite;
+}
