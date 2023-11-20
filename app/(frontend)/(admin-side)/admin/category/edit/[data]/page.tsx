@@ -41,13 +41,13 @@ export default function EditCategory ({params}:{params: {data: string}}) {
 
   return (
     <div className='p-10'>
-      <h1 className='font-bold lg:text-3xl md:text-2xl text-xl sm:text-left text-center'>EDIT CATEGORY</h1>
+      <h1 className='font-semibold lg:text-3xl md:text-2xl text-xl sm:text-left text-center'>EDIT CATEGORY</h1>
       <form onSubmit={handleSubmit}>
         <div className='pt-10 md:px-10 lg:px-28'>
           <InputWithTItle
               title='Category Name'
               value={categoryInfo.name}
-              className='sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px] opacity-40 hover:bg-slate-400 bg-slate-400 border pointer-events-none focus:outline-none cursor-default rounded-md read-only:'
+              className='sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px] opacity-40 hover:bg-slate-400 bg-slate-400 border pointer-events-none focus:outline-none cursor-default rounded-md read-only overflow-hidden'
             />
             <InputWithTItle
               title='Description'
