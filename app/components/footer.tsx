@@ -16,13 +16,13 @@ const Footer = () => {
           <button className='underline-link' onClick={() => setShowModal(true)}>Support</button>
         </div>
         <div className='flex justify-center gap-2'>
-          <a href='#' className='social-icon'>
-            <Image src='/instagram-icon.png' alt='Instagram' width={24} height={24} />
+          <a href="javascript:void(0);">
+            <Image src='/icon-ig.png' alt='Instagram' width={24} height={24} />
           </a>
-          <a href='#' className='social-icon'>
+          <a href="javascript:void(0);">
             <Image src='/facebook-icon.png' alt='Facebook' width={24} height={24} />
           </a>
-          <a href='#' className='social-icon'>
+          <a href="javascript:void(0);">
             <Image src='/twitter-icon.png' alt='Twitter' width={24} height={24} />
           </a>
         </div>

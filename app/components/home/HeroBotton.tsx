@@ -15,7 +15,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImage }) => {
         <p className="text-xl text-gray-300 mt-4">
           Clothes that work as hard as you do.
         </p>
-        <button className="mt-8 px-6 py-2 bg-white text-gray-900 font-semibold rounded-md button-hover-effect">
+        <button className="mt-8 px-6 py-2 bg-white text-gray-900 font-semibold rounded-md relative bg-white text-gray-800 px-6 py-2 rounded shadow hover:bg-transparent hover:text-white transition duration-300 overflow-hidden button-animation">
           Shop now
         </button>
       </div>
