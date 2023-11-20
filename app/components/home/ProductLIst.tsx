@@ -3,34 +3,49 @@ import ProductCard from './ProductCard';
 import React, { useEffect, useState } from 'react';
 import { Product } from '@/app/types';
 
-
-export default function ProductList()  {
-
+export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     const fetchProducts = async () => {
       try {
-        const response = await fetch('/api/products'); 
+        const response = await fetch('/api/products');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
         const data = await response.json();
         setProducts(data);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error fetching products:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProducts();
   }, []);
 
-  const productsToShow = Array.isArray(products) ? products.slice(0, 9) : [];
+  if (isLoading) {
+    return <div>Loading products...</div>;
+  }
 
-    return (
-      <div className='flex items-center justify-center mb-10'>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
-        {productsToShow.map((product) => (
-          <ProductCard key={product.product_id} product={product} />
-        ))}
-        </div>
-      </div>
+  if (error) {
+    return <div>Error fetching products: {error}</div>;
+  }
+
+  const productsToShow = products.slice(0, 6);
+
+  return (
+    <div className='flex items-center justify-center mb-2'>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mb-4 md:mb-4">
+      {productsToShow.map((product) => (
+        <ProductCard key={product.product_id} product={product} />
+      ))}
+    </div>
+  </div>
   );
-};
+}
