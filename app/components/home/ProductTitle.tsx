@@ -1,6 +1,6 @@
 export default function ProductTitle() {
     return (
-        <div className="flex flex-col items-center justify-center mt-20"> 
+        <div className="flex flex-col items-center justify-center my-20"> 
             <h1 className="text-5xl font-bold text-black">
                 SPRING 23
             </h1>
