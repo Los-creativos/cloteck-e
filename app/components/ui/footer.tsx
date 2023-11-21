@@ -2,6 +2,9 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Modal from '@/app/components/ui/Modal';
+import InstagramButton from '../instagram-button';
+import FacebookButton from '../facebook-button';
+import TwitterButton from '../twitter-button';
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -16,15 +19,9 @@ const Footer = () => {
           <button className='underline-link' onClick={() => setShowModal(true)}>Support</button>
         </div>
         <div className='flex justify-center gap-2'>
-          <a href="#">
-            <Image src='/icon-ig.png' alt='Instagram' width={24} height={24} />
-          </a>
-          <a href="#">
-            <Image src='/facebook-icon.png' alt='Facebook' width={24} height={24} />
-          </a>
-          <a href="#">
-            <Image src='/twitter-icon.png' alt='Twitter' width={24} height={24} />
-          </a>
+          <InstagramButton url='https://www.instagram.com/' /> 
+          <FacebookButton url='https://www.facebook.com/' /> 
+          <TwitterButton url='https://www.twitter.com/' /> 
         </div>
         <Modal isVisible={showModal} onClose={() => setShowModal(false)} />
       </footer>
