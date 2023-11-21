@@ -41,7 +41,7 @@ export default function ProductList() {
 
   return (
     <div className='flex items-center justify-center my-4'>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mb-4 md:mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10 mb-4 md:mb-4">
         {productsToShow.map((product) => (
           <ProductCard key={product.product_id} product={product} />
         ))}
