@@ -12,7 +12,7 @@ export default function ProductList() {
     setLoading(true);
     const fetchProducts = async () => {
       try {
-        const response = await fetch('/api/products');
+        const response = await fetch('/api/prodsucts');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -30,11 +30,11 @@ export default function ProductList() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading products...</div>;
+    return <div className='container justify-center text-3xl'>Loading products...</div>;
   }
 
   if (error) {
-    return <div>Error fetching products: {error}</div>;
+    return <div className='container justify-center text-3xl'>Error fetching products: {error}</div>;
   }
 
   const productsToShow = products.slice(0, 6);

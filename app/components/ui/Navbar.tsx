@@ -73,7 +73,6 @@ export default function Navbar() {
             stroke='currentColor'
             className='w-5 h-5'
           >
-            {/* Icono de usuario */}
             <path
               strokeLinecap='round'
               strokeLinejoin='round'
@@ -88,7 +87,6 @@ export default function Navbar() {
             stroke='currentColor'
             className='w-5 h-5'
           >
-            {/* Icono de carrito de compras */}
             <path
               strokeLinecap='round'
               strokeLinejoin='round'
@@ -98,7 +96,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile: Icons on the right */}
         <div className="md:hidden absolute right-4 top-4 z-50 flex gap-4">
         <svg
             xmlns='http://www.w3.org/2000/svg'
