@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-white px-4 py-2 flex items-center justify-center w-full relative">
+      <nav className="bg-white px-4 py-2 flex items-center justify-center w-full relative sticky top-0 z-50">
         <button className="md:hidden absolute left-4 top-4 z-50" onClick={toggleMenu}>
           {isMenuOpen ? (
             <svg
@@ -42,7 +42,7 @@ export default function Navbar() {
         <div className="text-black text-3xl font-semibold z-10">CLOTECK</div>
 
         <div className="hidden md:flex justify-between items-center absolute inset-0">
-          <ul className="flex sm:gap-3  gap-6  list-none font-semibold ml-4">
+          <ul className="flex md:gap-6 gap-10 list-none font-semibold ml-4">
             {links.map((link) => (
               <li key={link} className="underline-offset-4 sm:text-xs transition duration-300 ease-in-out ">
                 <a href="#" className="text-black no-underline">{link}</a>
