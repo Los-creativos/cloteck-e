@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Button from '@/app/components/Button'
+import Button from '@/app/components/ui/Button'
 import InputWithTItle from '@/app/components/InputWithTitle'
 import Link from 'next/link'
 
