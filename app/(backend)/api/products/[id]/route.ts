@@ -8,6 +8,19 @@ export async function GET (
   const uniqueProduct = await prisma.product.findUnique({
     where: {
       product_id: parseInt(params.id)
+    },
+    include: {
+      ProductCategory: {
+        include: {
+          category: true
+        }
+      },
+      Attribute: {
+        include: {
+          size: true,
+          color: true,
+        }
+      }
     }
   })
 

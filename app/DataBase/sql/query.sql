@@ -6,13 +6,13 @@ VALUES
     ('Bob', 'Williams', 'bob@example.com', 555666777, 'Premium'),
     ('Charlie', 'Brown', 'charlie@example.com', 111222333, 'Regular');
 
-INSERT INTO "Product" ("name", "description", "price", "image")
+INSERT INTO "Product" ("name", "description", "price")
 VALUES
-    ('Product 1', 'Description 1', 19.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/slides.jpg'),
-    ('Product 2', 'Description 2', 29.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
-    ('Product 3', 'Description 3', 39.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenTshirt01.jpg?v=1675455410'),
-    ('Product 4', 'Description 4', 49.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenMenscrew01.jpg?v=1675454919'),
-    ('Product 5', 'Description 5', 59.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
+    ('Product 1', 'Description 1', 19.99),
+    ('Product 2', 'Description 2', 29.99),
+    ('Product 3', 'Description 3', 39.99),
+    ('Product 4', 'Description 4', 49.99),
+    ('Product 5', 'Description 5', 59.99);
 
 INSERT INTO "Category" ("name", "description")
 VALUES
@@ -46,13 +46,13 @@ VALUES
     ('#FFFF00'),
     ('#FF00FF');
 
-INSERT INTO "Attribute" ("product_id", "size_id", "color_id", "quantity")
+INSERT INTO "Attribute" ("product_id", "size_id", "color_id", "quantity", "image")
 VALUES
-    (1, 1, 1, 10),
-    (2, 2, 2, 15),
-    (3, 3, 3, 20),
-    (4, 4, 4, 25),
-    (5, 5, 5, 30);
+    (1, 1, 1, 10, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/slides.jpg'),
+    (2, 2, 2, 15, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    (3, 3, 3, 20, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenTshirt01.jpg?v=1675455410'),
+    (4, 4, 4, 25, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenMenscrew01.jpg?v=1675454919'),
+    (5, 5, 5, 30, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
 
 INSERT INTO "Order" ("product_id", "user_id", "product_quantity", "date")
 VALUES
