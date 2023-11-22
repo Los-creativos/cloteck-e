@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {}
-
 module.exports = nextConfig
-
 module.exports = {
   async headers() {
     return [
@@ -18,6 +16,6 @@ module.exports = {
     ]
   }, 
   images: {
-    domains: ['fakestoreapi.com', "cdn.shopify.com"],
+    domains: ['fakestoreapi.com', "cdn.shopify.com", "res.cloudinary.com"],
   }
 }
