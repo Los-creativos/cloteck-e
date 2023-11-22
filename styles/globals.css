@@ -143,11 +143,11 @@
   }
 }
 
-a {
+#alink {
   position: relative;
 }
 
-a::after {
+#alink::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -160,7 +160,7 @@ a::after {
   transition: transform 0.25s ease-out;
 }
 
-a:hover::after {
+#alink:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
