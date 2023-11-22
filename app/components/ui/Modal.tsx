@@ -15,3 +15,4 @@ const Modal = ({ isVisible, onClose }: { isVisible: boolean, onClose: () => void
 }
 
 export default Modal
+

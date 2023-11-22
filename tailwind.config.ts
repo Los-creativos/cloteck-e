@@ -12,9 +12,15 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+      },
+      colors: {
+        'primary': '#f3f3f3'
       }
     }
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('tailwindcss-pseudo-elements'),
+  ]
 }
 export default config

@@ -8,11 +8,11 @@ VALUES
 
 INSERT INTO "Product" ("name", "description", "price", "image")
 VALUES
-    ('Product 1', 'Description 1', 19.99, 'image1.jpg'),
-    ('Product 2', 'Description 2', 29.99, 'image2.jpg'),
-    ('Product 3', 'Description 3', 39.99, 'image3.jpg'),
-    ('Product 4', 'Description 4', 49.99, 'image4.jpg'),
-    ('Product 5', 'Description 5', 59.99, 'image5.jpg');
+    ('Product 1', 'Description 1', 19.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/slides.jpg'),
+    ('Product 2', 'Description 2', 29.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    ('Product 3', 'Description 3', 39.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenTshirt01.jpg?v=1675455410'),
+    ('Product 4', 'Description 4', 49.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenMenscrew01.jpg?v=1675454919'),
+    ('Product 5', 'Description 5', 59.99, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
 
 INSERT INTO "Category" ("name", "description")
 VALUES

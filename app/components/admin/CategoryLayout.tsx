@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Button from './Button'
+import Button from '@/app/components/ui/Button'
 import CategoryDisplay from './CategoryDisplay'
 import Link from 'next/link'
 

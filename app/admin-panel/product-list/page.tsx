@@ -1,4 +1,4 @@
-import Button from '@/app/components/Button'
+import Button from '@/app/components/ui/Button'
 import ProductsLayout from '@/app/components/ProductsLayout'
 import Link from 'next/link'
 
