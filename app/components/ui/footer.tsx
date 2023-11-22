@@ -1,7 +1,11 @@
 'use client'
-import Image from 'next/image';
+
 import React, { useState } from 'react';
 import Modal from '@/app/components/ui/Modal';
+import InstagramIcon from '@/public/instagram-icon.png'
+import FacebookIcon from '@/public/facebook-icon.png'
+import TwitterIcon from '@/public/twitter-icon.png'
+import SocialMediaButton from './SocialMediaButton';
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -15,16 +19,10 @@ const Footer = () => {
           <button className='underline-link' onClick={() => setShowModal(true)}>Privacy Policy</button>
           <button className='underline-link' onClick={() => setShowModal(true)}>Support</button>
         </div>
-        <div className='flex justify-center gap-2'>
-          <a href="#">
-            <Image src='/icon-ig.png' alt='Instagram' width={24} height={24} />
-          </a>
-          <a href="#">
-            <Image src='/facebook-icon.png' alt='Facebook' width={24} height={24} />
-          </a>
-          <a href="#">
-            <Image src='/twitter-icon.png' alt='Twitter' width={24} height={24} />
-          </a>
+        <div className='flex justify-center'>
+          <SocialMediaButton href='https://www.instagram.com' src={InstagramIcon}/>
+          <SocialMediaButton href='https://www.facebook.com' src={FacebookIcon}/>
+          <SocialMediaButton href='https://www.twitter.com' src={TwitterIcon}/>
         </div>
         <Modal isVisible={showModal} onClose={() => setShowModal(false)} />
       </footer>
