@@ -2,7 +2,7 @@
 import { useParams } from 'next/navigation'; 
 import React, { useEffect, useState } from 'react';
 import { Product } from '@/app/types';
-import Footer from '@/app/components/footer';
+import Footer from '@/app/components/ui/footer';
 import Nadvar from '@/app/components/ui/Navbar';
 
 const ProductDetailPage = () => {

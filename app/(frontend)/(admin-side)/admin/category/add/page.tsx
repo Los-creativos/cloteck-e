@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import Button from '@/app/components/ui/Button'
-import InputWithTItle from '@/app/components/InputWithTitle'
-import Link from 'next/link'
+import InputWithTItle from '@/app/components/admin/InputWithTitle'
+import LinkButton from '@/app/components/ui/LinkButton'
 
 export default function AddCategory () {
   const [name, setCategoryName] = useState('')
@@ -31,7 +31,7 @@ export default function AddCategory () {
 
   return (
     <div className='p-10'>
-      <h1 className='font-bold lg:text-3xl md:text-2xl text-xl sm:text-left text-center'>ADD CATEGORY</h1>
+      <h1 className='font-semibold lg:text-3xl md:text-2xl text-xl sm:text-left text-center'>ADD CATEGORY</h1>
       <form onSubmit={handleSubmit}>
         <div className='pt-10 md:px-10 lg:px-28'>
           <InputWithTItle
@@ -47,9 +47,7 @@ export default function AddCategory () {
             className='3xl:min-h-[57px] lg:min-h-[80px] md:min-h-[120px] sm:min-h-[120px] min-h-[230px] 3xl:max-h-[57px] lg:max-h-[80px] md:max-h-[120px] sm:max-h-[120px] max-h-[230px]'
           />
           <div className='flex justify-between pt-20'>
-            <Link href='/admin-panel/category-list'>
-              <Button text='Back' className='text-xl px-10 py-3 rounded-sm' />
-            </Link>
+            <LinkButton text='Back' className='text-xl px-10 py-3 rounded-sm' href='/admin/category' />
             <Button text='Add' type='submit' className='text-xl px-10 py-3 rounded-sm' />
           </div>
         </div>
