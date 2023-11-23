@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
+import { updateCustomerValidator } from "../user.schema";
 
 export async function GET (
   req: NextRequest,
@@ -59,6 +60,7 @@ export async function PUT (
   }
 ) {
   const data = await req.json()
+  updateCustomerValidator.parse(data)
   try {
     await prisma.customer.update({
       where: {
