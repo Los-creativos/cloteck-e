@@ -12,7 +12,7 @@ model Customer {
   customer_id  Int     @id @default(autoincrement())
   name         String  @db.VarChar(50)
   last_name    String  @db.VarChar(50)
-  email        String  @db.VarChar(50)
+  email        String  @db.VarChar(50) @unique
   password     String  @db.VarChar(100)
   phone_number Int?
   type_user    String  @db.VarChar(50)
