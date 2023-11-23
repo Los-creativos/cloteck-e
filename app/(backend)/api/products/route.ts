@@ -91,7 +91,7 @@ export async function POST (request: NextRequest) {
     return NextResponse.json(createdProduct, attributes)
   } catch (error) {
     console.error('Error', error)
-    return NextResponse.json({ error: (error as any).errors }, { status: 401 })
+    return NextResponse.json({ error: (error as any).errors }, { status: 400 })
   }
 }
 

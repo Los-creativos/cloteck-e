@@ -36,7 +36,7 @@ export default function ProductDisplay ({
       <div className='lg:hidden border-t border-stone-300 w-full col-span-2 my-4' />
       <div className='lg:hidden font-semibold justify-center items-center'>Price</div>
       <div className='lg:hidden font-semibold justify-center items-center'>Category</div>
-      <div className='flex justify-center items-center'>{Price}</div>
+      <div className='flex justify-center items-center'>Bs. {Price}</div>
       <div className='flex justify-center items-center'>{Category}</div>
       <div className='lg:hidden border-t border-stone-300 w-full col-span-2 my-4' />
       <div className='lg:hidden font-semibold justify-center items-center'>Edit</div>

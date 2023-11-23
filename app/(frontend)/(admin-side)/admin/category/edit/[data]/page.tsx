@@ -45,6 +45,7 @@ export default function EditCategory ({params}:{params: {data: string}}) {
       <form onSubmit={handleSubmit}>
         <div className='pt-10 md:px-10 lg:px-28'>
           <InputWithTItle
+              readOnly
               title='Category Name'
               value={categoryInfo.name}
               className='sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px] opacity-40 hover:bg-slate-400 bg-slate-400 border pointer-events-none focus:outline-none cursor-default rounded-md read-only overflow-hidden'
