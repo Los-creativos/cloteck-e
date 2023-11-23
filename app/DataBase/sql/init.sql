@@ -5,6 +5,7 @@ CREATE TABLE "Customer" (
     "email" VARCHAR(50) NOT NULL,
     "phone_number" INTEGER,
     "type_user" VARCHAR(50) NOT NULL,
+    "password" VARCHAR(100) NOT NULL,
 
     CONSTRAINT "Customer_pkey" PRIMARY KEY ("customer_id")
 );
