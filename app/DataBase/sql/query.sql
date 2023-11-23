@@ -1,10 +1,10 @@
-INSERT INTO "Customer" ("name", "last_name", "email", "phone_number", "type_user")
+INSERT INTO "Customer" ("name", "last_name", "email", "phone_number", "type_user", "password")
 VALUES
-    ('John', 'Doe', 'john@example.com', 123456789, 'Regular'),
-    ('Jane', 'Smith', 'jane@example.com', 987654321, 'Premium'),
-    ('Alice', 'Johnson', 'alice@example.com', NULL, 'Regular'),
-    ('Bob', 'Williams', 'bob@example.com', 555666777, 'Premium'),
-    ('Charlie', 'Brown', 'charlie@example.com', 111222333, 'Regular');
+    ('John', 'Doe', 'john@example.com', 123456789, 'Regular', 'password1'),
+    ('Jane', 'Smith', 'jane@example.com', 987654321, 'Premium', 'password2'),
+    ('Alice', 'Johnson', 'alice@example.com', NULL, 'Regular', 'password3'),
+    ('Bob', 'Williams', 'bob@example.com', 555666777, 'Premium', 'password4'),
+    ('Charlie', 'Brown', 'charlie@example.com', 111222333, 'Regular', 'password5');
 
 INSERT INTO "Product" ("name", "description", "price")
 VALUES
