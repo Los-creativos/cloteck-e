@@ -11,7 +11,7 @@ import Link from 'next/link';
       <Link href={`/products/${product.product_id}`} passHref>
       <div id="alink" className="flex flex-col items-center p-4 rounded-lg transform transition duration-500 hover:scale-105">
         <div className='relative h-72 w-full mb-4'>
-          <Image src={product.image} alt={product.name} width={300} height={300} 
+          <Image src={product.Attribute[0].image} alt={product.name} width={300} height={300} 
                  className="rounded-lg" loading="lazy" />
         </div>
         <div className='w-full text-left'>
