@@ -13,7 +13,7 @@ export async function GET () {
       Attribute: {
         include: {
           size: true,
-          color: true
+          color: true,
         }
       }
     }
@@ -27,29 +27,17 @@ export async function POST (request: NextRequest) {
     const data = await request.json()
 
     createProductSchema.parse(data)
-
+    
     const createdProduct = await prisma.product.create({
       data: {
         name: data.name,
         description: data.description,
         price: data.price,
-        image: data.image,
         ProductCategory: {
-          create: data.ProductCategory.map((category: { category_id: any }) => ({
+          create: data.ProductCategory.map((category: { category_id: number }) => ({
             category: {
               connect: { category_id: category.category_id }
             }
-          }))
-        },
-        Attribute: {
-          create: data.Attribute.map((attribute: { size_id: any; color_id: any; quantity: any }) => ({
-            size: {
-              connect: { size_id: attribute.size_id }
-            },
-            color: {
-              connect: { color_id: attribute.color_id }
-            },
-            quantity: attribute.quantity
           }))
         }
       },
@@ -58,24 +46,60 @@ export async function POST (request: NextRequest) {
           include: {
             category: true
           }
-        },
-        Attribute: {
-          include: {
-            size: true,
-            color: true
-          }
         }
       }
     })
+    
+    const attributes = data.Attribute.map(async (attribute: { size: string; color: string; quantity: number; image: string }) => {
+      const createColor = await prisma.color.create({
+        data: {
+          name: attribute.color,
+        },
+      });
 
-    return NextResponse.json(createdProduct)
+      const createSize = await prisma.size.create({
+        data: {
+          name: attribute.size,
+        },
+      });
+
+      const createAttribute = await prisma.attribute.create({
+        data: {
+          product: {
+            connect: {
+              product_id: createdProduct.product_id,
+            },
+          },
+          size: {
+            connect: {
+              size_id: createSize.size_id,
+            },
+          },
+          color: {
+            connect: {
+              color_id: createColor.color_id,
+            },
+          },
+          quantity: attribute.quantity,
+          image: attribute.image,
+        },
+      });
+
+      return createAttribute;
+    });
+
+    return NextResponse.json(createdProduct, attributes)
   } catch (error) {
     console.error('Error', error)
-    return NextResponse.json({ error: (error as any).errors }, { status: 401 })
+    return NextResponse.json({ error: (error as any).errors }, { status: 400 })
   }
 }
 
 export async function DELETE () {
+  await prisma.productCategory.deleteMany()
+  await prisma.attribute.deleteMany()
+  await prisma.color.deleteMany()
+  await prisma.size.deleteMany()
   await prisma.product.deleteMany()
   return NextResponse.json('Successful deletion of all products')
 }

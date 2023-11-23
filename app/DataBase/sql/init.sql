@@ -13,8 +13,7 @@ CREATE TABLE "Product" (
     "product_id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "description" VARCHAR(200) NOT NULL,
-    "price" INTEGER NOT NULL,
-    "image" CHAR(100) NOT NULL,
+    "price" NUMERIC NOT NULL,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("product_id")
 );
@@ -55,6 +54,7 @@ CREATE TABLE "Attribute" (
     "size_id" INTEGER NOT NULL,
     "color_id" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
+    "image" CHAR(300) NOT NULL,
 
     CONSTRAINT "Attribute_pkey" PRIMARY KEY ("attribute_id")
 );
