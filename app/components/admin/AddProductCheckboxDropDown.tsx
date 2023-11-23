@@ -1,6 +1,5 @@
-// AddProductCheckBoxDropDown component
 import { useEffect, useState } from "react";
-import Dropdown from "@/app/components/common/DropDown"
+import Dropdown from "@/app/components/ui/DropDown"
 import { Category } from "@prisma/client";
 
 export default function AddProductCheckBoxDropDown({ selectedCategories = [], onChange }: { selectedCategories: number[], onChange: (categories: number[]) => void;}) {

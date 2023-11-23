@@ -1,5 +1,6 @@
-import { Prisma } from '@prisma/client';
-import { array, number, object, string, TypeOf, z } from 'zod'
+import { array, number, object, string, TypeOf } from 'zod'
+
+const COLOR_REGEX = new RegExp("^#(?:[0-9a-fA-F]{3}){1,2}$")
 
 export const createProductSchema = object({
   name: string({required_error: "The name is mandatory"})
@@ -10,27 +11,33 @@ export const createProductSchema = object({
     .trim()
     .min(20, 'Minium of 20 characters required')
     .max(200, 'Maximun characters are 200'),
-  price: z.instanceof(Prisma.Decimal).refine((price) => price.greaterThan('0.01')),
+  price: number({required_error: "The price is required"}).positive('It should be a positive number').finite(),
   ProductCategory: array(
     object({
       category_id: number().positive('It should be a positive number').finite(),
     })
-    ).nonempty(),
-    Attribute: array(
-      object({
-        size: string({required_error: "The size is mandatory"}).trim(),
-        color: string({required_error: "The color is mandatory"}).trim(),
-        quantity: number({required_error: "The quantity is mandatory"}).int().positive('It should be a positive number'),
-        image: string({required_error: "The image URL is mandatory"}).trim().min(10, 'Minuim of 10 characters required').max(300, 'Maxium characters are 100'),
-    })
-  ).nonempty()
+    ).nonempty('It should have at least one category'),
+  Attribute: array(
+    object({
+      size: string({required_error: "The size is mandatory"}).trim(),
+      color: string({required_error: "The color is mandatory"}).trim().regex(COLOR_REGEX, "The color is not a valid Hex color"),
+      quantity: number({required_error: "The quantity is mandatory"}).int().positive('It should be a positive number'),
+      image: string({required_error: "The image URL is mandatory"}).trim().min(10, 'Minuim of 10 characters required').max(300, 'Maxium characters are 300'),
+  })
+  ).nonempty('It should have at least one attribute')
 })
 
 export const updateProductSchema = object({
-  body: object({
-    description: string(),
-  }).partial()
-})
+    description: string()
+    .trim()
+    .min(20, 'Minium of 20 characters required')
+    .max(200, 'Maximun characters are 200'),
+    ProductCategory: array(
+      object({
+        category_id: number().positive('It should be a positive number').finite(),
+      })
+      ).nonempty('It should have at least one category'),
+    }).partial()
 
 export const filterQuery = object({
   limit: number().default(1),

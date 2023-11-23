@@ -27,7 +27,7 @@ const Footer = () => {
         <Modal isVisible={showModal} onClose={() => setShowModal(false)} />
       </footer>
     </>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

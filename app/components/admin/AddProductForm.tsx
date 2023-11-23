@@ -2,11 +2,12 @@
 
 import { useState } from 'react'
 import InputWithTItle from './InputWithTitle'
-import Button from '@/app/components/common/Button'
-import LinkButton from '@/app/components/common/LinkButton'
+import Button from '@/app/components/ui/Button'
+import LinkButton from '@/app/components/ui/LinkButton'
 import AddProductCheckBoxDropDown from './AddProductCheckboxDropDown'
-import Dropdown from '../common/DropDown'
+import Dropdown from '../ui/DropDown'
 import AttributeDisplay from './AttributeDisplay'
+import { createAttributeSchema } from '@/app/(backend)/api/attribute/attribute.schema'
 
 export interface Attribute {
   size: string
@@ -56,10 +57,11 @@ export default function AddProductForm() {
           quantity,
           image: uploadedImageData.secure_url,
         };
+        createAttributeSchema.parse(attribute)
         setAttributes([...attributes, attribute]);
       } catch (error) {
         console.error('Error uploading image:', error);
-        alert('Error uploading image. Please try again.');
+        alert('Error adding attribute');
       }
     } else {
       alert('Please fill all the fields');
@@ -85,7 +87,6 @@ export default function AddProductForm() {
       })),
     }
 
-    console.log(JSON.stringify(productData))
     try {
       const response = await fetch('/api/products/', {
         method: 'POST',
@@ -116,8 +117,8 @@ export default function AddProductForm() {
           <InputWithTItle
             title='Price'
             placeholder='Ej. 163.00'
-            value={price.toString()}
-            onChange={(e: any) => setPrice(e.target.value)}
+            value={price === 0 ? '' : price.toString()}
+            onChange={(e: any) => setPrice(parseFloat(e.target.value) || 0)}
             className='sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px]'
           />
           <AddProductCheckBoxDropDown
@@ -150,8 +151,8 @@ export default function AddProductForm() {
           <InputWithTItle
             title='Quantity'
             placeholder='Ej. 54'
-            value={quantity.toString()}
-            onChange={(e: any) => setQuantity(e.target.value)}
+            value={quantity === 0 ? '' : quantity.toString()}
+            onChange={(e: any) => setQuantity(parseInt(e.target.value) || 0)}
             className='sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px]'
           />
           <div>
