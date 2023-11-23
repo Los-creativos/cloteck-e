@@ -26,6 +26,7 @@
     "clsx": "^2.0.0",
     "commitlint": "^18.4.1",
     "debug": "^4.3.4",
+    "jsonwebtoken": "^9.0.2",
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.292.0",
     "next": "14.0.0",
@@ -37,6 +38,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-pseudo-elements": "^2.0.0",
     "ts-node": "^10.9.1",
+    "universal-cookie": "^6.1.1",
     "uui": "^1.0.7",
     "zod": "^3.22.4",
     "zustand": "^4.4.6"
@@ -48,6 +50,7 @@
     "@testing-library/react": "^14.1.0",
     "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.8",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
