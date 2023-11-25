@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from "react";
-import InputWithTItle from "../admin/InputWithTitle";
-import Button from "../ui/Button";
+import InputWithTItle from "@/app/components/admin/InputWithTitle";
+import Button from "@/app/components/ui/Button";
+import { login } from "@/app/utils/LoginUtils";
 
 export default function LoginForm () {
   const [email, setEmail] = useState('')
@@ -10,15 +11,8 @@ export default function LoginForm () {
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault()
-    await fetch(`/api/user/login/${email}/${password}`)
-      .then((res) => {
-        if (res.ok) {
-          alert('Login success')
-        } else {
-          alert('Invalid email or password')
-        }
-      }
-    )
+    const isLogged = await login(email, password)
+    isLogged ? alert("You are logged") : alert("Invalid Email or Password")
   }
 
   return (
