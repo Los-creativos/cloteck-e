@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { createCustomerValidator } from "./user.schema";
+import { hashPassword } from "@/app/utils/LoginUtils";
 
 export async function GET () {
   const users = await prisma.customer.findMany({
@@ -17,6 +18,7 @@ export async function POST (request: NextRequest) {
     const data = await request.json()
     
     createCustomerValidator.parse(data)
+    const hashedPassword = await hashPassword(data.password)
 
     const createdUser = await prisma.customer.create({
       data: {
@@ -25,7 +27,7 @@ export async function POST (request: NextRequest) {
         email: data.email,
         phone_number: data.phone,
         type_user: data.type_user,
-        password: data.password,
+        password: hashedPassword,
       }
     })
     return NextResponse.json(createdUser)
