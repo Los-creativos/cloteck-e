@@ -10,7 +10,6 @@ export default async function middleware (request: NextRequest) {
     const token = await getTokenCookie()    
     const data = await VerifyJwt(token?.value as string) as Customer
     
-    console.log(data)
     if (data) {
       if (data.type_user === 'Admin') {
         return NextResponse.next()
@@ -19,5 +18,15 @@ export default async function middleware (request: NextRequest) {
     } else {
       return NextResponse.redirect(new URL('/login', request.url))
     }
+  }
+
+  if (pathname.startsWith('/login')) {
+    const token = await getTokenCookie()    
+    const data = await VerifyJwt(token?.value as string) as Customer
+    
+    if (data) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
+    return NextResponse.next()
   }
 }

@@ -54,3 +54,10 @@ export const updateCustomerValidator = object({
     invalid_type_error: 'The type user must be a string'
   }),
 }).partial()
+
+export const emailCustomerValidation = object({
+  email: string({
+    required_error: 'The email is required',
+    invalid_type_error: 'The email must be a string'
+  }).trim().min(6, 'Minimum of 6 characters are required').max(50, 'Maxium characters are 50').regex(EMAIL_REGEX),
+})
