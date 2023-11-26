@@ -1,3 +1,5 @@
+'use server'
+
 import { prisma } from "@/lib/prisma";
 import { Prisma, Customer } from "@prisma/client";
 import { createCustomerValidator } from "./user.schema";
@@ -98,11 +100,12 @@ export const findUserForLogin = async (
   email: string
 ) => {
   try {
-    return await prisma.customer.findUnique({
+    const user = await prisma.customer.findUnique({
       where: {
         email
       }
     }) as Customer
+    return user
   } catch (error) {
     return NextResponse.json(error, {status: 500})
   }

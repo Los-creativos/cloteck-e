@@ -1,10 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
-import jwt from 'jsonwebtoken'
-import { setTokenCookie } from "@/app/utils/CookieManagement";
-
-const KEY = 'qz8yrcyAfz5iBVwBItQxQmC7INCAGiS2Hw5X'
+import { SignJwt } from "@/app/utils/JwtUtils";
 
 export async function GET (
   req: NextRequest,
@@ -22,15 +19,15 @@ export async function GET (
       }
     })
 
-    const token = jwt.sign({
+    const data = {
       id: uniqueCustomer.customer_id,
       name: uniqueCustomer.name,
       last_name: uniqueCustomer.last_name,
       email: uniqueCustomer.email,
       type_user: uniqueCustomer.type_user
-    }, KEY, { expiresIn: '5h'})
+    }
 
-    setTokenCookie(token)
+    const token = await SignJwt(data, '5h');
 
     return NextResponse.json({token})
   } catch (error) {

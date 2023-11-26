@@ -1,15 +1,15 @@
-import Cookies from 'universal-cookie';
+'use server'
 
-const cookies = new Cookies();
+import { cookies } from 'next/headers'
 
-export const setTokenCookie = (token: string): void => {
-  cookies.set('token', token, { maxAge: 5 * 24 * 60 * 60, secure: true })
+export const setTokenCookie = (token: string) => {
+  cookies().set('token', token)
 }
 
-export const getTokenCookie = (): string | undefined => {
-  return cookies.get('token')
+export const getTokenCookie = async () => {
+  return cookies().get('token')
 }
 
 export const removeTokenCookie = (): void => {
-  cookies.remove('token')
+  cookies().delete('token')
 }
