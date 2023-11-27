@@ -48,14 +48,12 @@ model Size {
   size_id   Int         @id @default(autoincrement())
   name      String      @db.VarChar(50)
   Attribute Attribute[]
-  order     Order[]
 }
 
 model Color {
   color_id  Int         @id @default(autoincrement())
   name      String      @db.VarChar(50)
   Attribute Attribute[]
-  order     Order[]
 }
 
 model Attribute {
