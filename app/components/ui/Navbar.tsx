@@ -50,10 +50,10 @@ export default function Navbar() {
             </svg>
           )}
         </button>
-
-        <header className="text-black text-3xl font-semibold z-10">
-          CLOTECK
-        </header>
+        
+          <Link className='text-black text-3xl font-semibold z-10' href={'/'}>
+            CLOTECK
+          </Link>
 
         <div className="hidden md:flex justify-between items-center absolute inset-0">
           <ul className="flex md:gap-6 gap-10 list-none font-semibold ml-4">
