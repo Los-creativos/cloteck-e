@@ -1,6 +1,6 @@
 INSERT INTO "Customer" ("name", "last_name", "email", "phone_number", "type_user", "password")
 VALUES
-    ('John', 'Doe', 'john@example.com', 123456789, 'Regular', 'password1'),
+    ('John', 'Doe', 'john@example.com', 123456789, 'Admin', '$2a$10$eKdnOiDdO0dG.U4LPvCEAOZC6R8AvFy3YVibp4uorgiI4oq.ferjy'),
     ('Jane', 'Smith', 'jane@example.com', 987654321, 'Premium', 'password2'),
     ('Alice', 'Johnson', 'alice@example.com', NULL, 'Regular', 'password3'),
     ('Bob', 'Williams', 'bob@example.com', 555666777, 'Premium', 'password4'),
@@ -48,7 +48,7 @@ VALUES
 
 INSERT INTO "Attribute" ("product_id", "size_id", "color_id", "quantity", "image")
 VALUES
-    (1, 1, 1, 10, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/slides.jpg'),
+    (1, 1, 1, 10, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
     (2, 2, 2, 15, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
     (3, 3, 3, 20, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenTshirt01.jpg?v=1675455410'),
     (4, 4, 4, 25, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenMenscrew01.jpg?v=1675454919'),
