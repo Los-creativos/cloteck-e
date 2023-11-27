@@ -11,6 +11,9 @@ export async function GET () {
           product: true
         }
       }
+    },
+    orderBy: {
+      name: 'asc'
     }
   })
   return NextResponse.json(categories)
