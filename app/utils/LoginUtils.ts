@@ -19,7 +19,7 @@ export const login = async (email: string, password: string) => {
     name: user.name,
     last_name: user.last_name,
     email: user.email,
-    type_user: user.type_user
+    type_user: user.type_user //roles andre arregla
   }
 
   const token = await SignJwt(data, '5h')

@@ -4,9 +4,9 @@ const KEY = 'qz8yrcyAfz5iBVwBItQxQmC7INCAGiS2Hw5X';
 
 export const SignJwt = async (data: Object, expiresIn?: string) => {
   const token = await new jose.SignJWT(data as jose.JWTPayload)
-    .setProtectedHeader({alg: 'HS256'})
+    .setProtectedHeader({alg: 'HS256'}) //
     .setIssuedAt()
-    .setExpirationTime(expiresIn ? expiresIn : '5h')
+    .setExpirationTime(expiresIn ? expiresIn : '5h') //poner la hora en .env
     .sign(new TextEncoder().encode(KEY))
   return token;
 }
