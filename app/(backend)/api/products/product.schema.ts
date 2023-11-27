@@ -11,7 +11,8 @@ export const createProductSchema = object({
     .trim()
     .min(20, 'Minium of 20 characters required')
     .max(200, 'Maximun characters are 200'),
-  price: number({required_error: "The price is required"}).positive('It should be a positive number').finite(),
+  price: number({required_error: "The price is required"}).positive('It should be a positive number')
+    .lte(100000000 , "Invalid quantity, only numbers less than 10 digits are allowed."),
   ProductCategory: array(
     object({
       category_id: number().positive('It should be a positive number').finite(),
