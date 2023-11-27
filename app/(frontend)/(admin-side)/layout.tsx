@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
-import AdminHeader from '@/app/components/admin/AdminHeader'
+import Navbar from '@/app/components/ui/Navbar'
 
 export default function AdminLayout ({ children }: { children: ReactNode }) {
   return (
     <div>
-      <AdminHeader />
+      <Navbar admin />
       {children}
     </div>
   )
