@@ -1,6 +1,6 @@
 import { number, object, string } from 'zod'
 
-const NO_SPECIAL_CHARACTERS_REGEX = new RegExp('^[\w\d\s]+$')
+const NO_SPECIAL_CHARACTERS_REGEX = new RegExp('^[A-Za-z0-9 ]+$')
 
 export const createCategoryValidator = object({
   name: string({
