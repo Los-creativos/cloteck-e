@@ -54,13 +54,13 @@ VALUES
     (4, 4, 4, 25, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenMenscrew01.jpg?v=1675454919'),
     (5, 5, 5, 30, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
 
-INSERT INTO "Order" ("product_id", "user_id", "product_quantity", "date")
+INSERT INTO "Order" ("product_id", "user_id", "size_id", "color_id", "product_quantity", "date")
 VALUES
-    (1, 1, 2, CURRENT_TIMESTAMP),
-    (2, 2, 1, CURRENT_TIMESTAMP),
-    (3, 3, 3, CURRENT_TIMESTAMP),
-    (4, 4, 2, CURRENT_TIMESTAMP),
-    (5, 5, 1, CURRENT_TIMESTAMP);
+    (1, 101, 1, 1, 3, CURRENT_TIMESTAMP),
+    (2, 102, 2, 2, 2, CURRENT_TIMESTAMP),
+    (3, 103, 1, 3, 1, CURRENT_TIMESTAMP),
+    (1, 104, 2, 1, 5, CURRENT_TIMESTAMP),
+    (2, 105, 1, 2, 2, CURRENT_TIMESTAMP);
 
 INSERT INTO "Region" ("name", "taxes")
 VALUES

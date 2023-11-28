@@ -48,12 +48,14 @@ model Size {
   size_id   Int         @id @default(autoincrement())
   name      String      @db.VarChar(50)
   Attribute Attribute[]
+  order     Order[]
 }
 
 model Color {
   color_id  Int         @id @default(autoincrement())
   name      String      @db.VarChar(50)
   Attribute Attribute[]
+  order     Order[]
 }
 
 model Attribute {
@@ -72,10 +74,14 @@ model Order {
   order_id         Int      @id @default(autoincrement())
   product_id       Int
   user_id          Int
+  size_id          Int
+  color_id         Int
   product_quantity Int
   date             DateTime @default(now())
   product          Product  @relation(fields: [product_id], references: [product_id])
   customer         Customer @relation(fields: [user_id], references: [customer_id])
+  size             Size @relation(fields: [size_id], references: [size_id])
+  color            Color @relation(fields: [color_id], references: [color_id])
 }
 
 model Region {

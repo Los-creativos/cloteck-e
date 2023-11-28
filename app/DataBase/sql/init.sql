@@ -2,10 +2,10 @@ CREATE TABLE "Customer" (
     "customer_id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "last_name" VARCHAR(50) NOT NULL,
-    "email" VARCHAR(50) NOT NULL UNIQUE,
+    "email" VARCHAR(50) NOT NULL,
+    "password" VARCHAR(100) NOT NULL,
     "phone_number" INTEGER,
     "type_user" VARCHAR(50) NOT NULL,
-    "password" VARCHAR(300) NOT NULL,
 
     CONSTRAINT "Customer_pkey" PRIMARY KEY ("customer_id")
 );
@@ -55,19 +55,21 @@ CREATE TABLE "Attribute" (
     "size_id" INTEGER NOT NULL,
     "color_id" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
-    "image" CHAR(300) NOT NULL,
+    "image" CHAR(100) NOT NULL,
 
     CONSTRAINT "Attribute_pkey" PRIMARY KEY ("attribute_id")
 );
 
 CREATE TABLE "Order" (
-     "order_id" SERIAL NOT NULL,
-     "product_id" INTEGER NOT NULL,
-     "user_id" INTEGER NOT NULL,
-     "product_quantity" INTEGER NOT NULL,
-     "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "order_id" SERIAL NOT NULL,
+    "product_id" INTEGER NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "size_id" INTEGER NOT NULL,
+    "color_id" INTEGER NOT NULL,
+    "product_quantity" INTEGER NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-     CONSTRAINT "Order_pkey" PRIMARY KEY ("order_id")
+    CONSTRAINT "Order_pkey" PRIMARY KEY ("order_id")
 );
 
 CREATE TABLE "Region" (
@@ -77,7 +79,7 @@ CREATE TABLE "Region" (
 
     CONSTRAINT "Region_pkey" PRIMARY KEY ("region_id")
 );
-
+CREATE UNIQUE INDEX "Customer_email_key" ON "Customer"("email");
 ALTER TABLE "ProductCategory" ADD CONSTRAINT "ProductCategory_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "Product"("product_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "ProductCategory" ADD CONSTRAINT "ProductCategory_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("category_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "Attribute" ADD CONSTRAINT "Attribute_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "Product"("product_id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -85,3 +87,5 @@ ALTER TABLE "Attribute" ADD CONSTRAINT "Attribute_size_id_fkey" FOREIGN KEY ("si
 ALTER TABLE "Attribute" ADD CONSTRAINT "Attribute_color_id_fkey" FOREIGN KEY ("color_id") REFERENCES "Color"("color_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "Order" ADD CONSTRAINT "Order_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "Product"("product_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "Order" ADD CONSTRAINT "Order_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Customer"("customer_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Order" ADD CONSTRAINT "Order_size_id_fkey" FOREIGN KEY ("size_id") REFERENCES "Size"("size_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Order" ADD CONSTRAINT "Order_color_id_fkey" FOREIGN KEY ("color_id") REFERENCES "Color"("color_id") ON DELETE RESTRICT ON UPDATE CASCADE;
