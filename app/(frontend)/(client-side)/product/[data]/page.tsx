@@ -12,7 +12,7 @@ const ProductDetailPage = ({ params }: { params: { data: string } }) => {
   const productInfo = JSON.parse(decodeURIComponent(params.data))
 
   return (
-    <form className='grid grid-cols-1 md:grid-cols-2 p-4 md:p-8'>
+    <form className='grid grid-cols-2 p-8'>
       <section className='flex justify-center p-4 h-full w-full'>
         <Image alt={productInfo.name} src={productInfo.Attribute[idSelected? idSelected: 0].image} width={450} height={450} className='max-h-full w-auto' />
       </section>
