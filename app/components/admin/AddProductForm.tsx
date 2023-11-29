@@ -20,15 +20,15 @@ export interface Attribute {
 }
 
 export default function AddProductForm() {
-  const [name, setProductName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
-  const [size, setSize] = useState("");
-  const [color, setColor] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [attributes, setAttributes] = useState<Attribute[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-  const [imageFile, setImageFile] = useState(new FormData());
+  const [name, setProductName] = useState('')
+  const [price, setPrice] = useState('')
+  const [description, setDescription] = useState('')
+  const [size, setSize] = useState('')
+  const [color, setColor] = useState('')
+  const [quantity, setQuantity] = useState(0)
+  const [attributes, setAttributes] = useState<Attribute[]>([])
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([])
+  const [imageFile, setImageFile] = useState(new FormData())
 
   const handleCategoriesChange = (categories: number[]) => {
     setSelectedCategories(categories);
@@ -90,12 +90,20 @@ export default function AddProductForm() {
     }
   };
 
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    if (/^\d{0,8}\.?\d{0,2}$/.test(inputValue)) {
+      setPrice(inputValue);
+    }
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const productData = {
       name,
       description,
-      price,
+      price: parseFloat(price),
       ProductCategory: selectedCategories.map((category_id) => ({
         category_id,
       })),
@@ -143,11 +151,11 @@ export default function AddProductForm() {
             className="sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px]"
           />
           <InputWithTItle
-            title="Price"
-            placeholder="Ej. 163.00"
-            value={price === 0 ? "" : price.toString()}
-            onChange={(e: any) => setPrice(parseFloat(e.target.value) || 0)}
-            className="sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px]"
+            title='Price'
+            placeholder='Ej. 163.00'
+            value={price === '' ? "" : price.toString()}
+            onChange={(e: any) => handlePriceChange(e)}
+            className='sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px]'
           />
           <AddProductCheckBoxDropDown
             selectedCategories={selectedCategories}
@@ -170,8 +178,8 @@ export default function AddProductForm() {
             className="sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px]"
           />
           <InputWithTItle
-            title="Color"
-            placeholder="Ej. #FFFFF"
+            title='Color'
+            placeholder='Ej. #FFFFFF'
             value={color}
             onChange={(e: any) => setColor(e.target.value)}
             className="sm:min-h-[57px] min-h-[80px] sm:max-h-[57px] max-h-[80px]"

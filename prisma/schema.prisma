@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native" , "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x", "rhel-openssl-1.0.x"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x", "rhel-openssl-1.0.x"]
 }
 
 datasource db {
@@ -23,7 +23,7 @@ model Product {
   product_id      Int               @id @default(autoincrement())
   name            String            @db.VarChar(50)
   description     String            @db.VarChar(200)
-  price           Decimal
+  price           Decimal           @db.Decimal(10, 2)
   ProductCategory ProductCategory[]
   Attribute       Attribute[]
   Order           Order[]
@@ -62,7 +62,7 @@ model Attribute {
   size_id      Int
   color_id     Int
   quantity     Int
-  image           String            @db.Char(100)
+  image        String  @db.Char(100)
   product      Product @relation(fields: [product_id], references: [product_id])
   size         Size    @relation(fields: [size_id], references: [size_id])
   color        Color   @relation(fields: [color_id], references: [color_id])

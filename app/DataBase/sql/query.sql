@@ -9,10 +9,10 @@ VALUES
 INSERT INTO "Product" ("name", "description", "price")
 VALUES
     ('Product 1', 'Description 1', 19.99),
-    ('Product 2', 'Description 2', 29.99),
-    ('Product 3', 'Description 3', 39.99),
-    ('Product 4', 'Description 4', 49.99),
-    ('Product 5', 'Description 5', 59.99);
+    ('Product 2', 'Description 2', 29.92),
+    ('Product 3', 'Description 3', 39.29),
+    ('Product 4', 'Description 4', 49.49),
+    ('Product 5', 'Description 5', 59.79);
 
 INSERT INTO "Category" ("name", "description")
 VALUES

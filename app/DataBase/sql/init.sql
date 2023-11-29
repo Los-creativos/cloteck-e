@@ -14,7 +14,7 @@ CREATE TABLE "Product" (
     "product_id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "description" VARCHAR(200) NOT NULL,
-    "price" NUMERIC NOT NULL,
+    "price" NUMERIC(10,2) NOT NULL,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("product_id")
 );
