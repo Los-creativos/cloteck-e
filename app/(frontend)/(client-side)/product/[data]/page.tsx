@@ -48,7 +48,7 @@ const ProductDetailPage = ({ params }: { params: { data: string } }) => {
         </section>
         <section className='my-3'>
           <p>QUANTITY</p>
-          <input type='number' min='1' max='10' defaultValue='1'/>
+          <input type='number' min='1' max='50' defaultValue='1' className='bg-white-200 border border-black rounded-none'/>
         </section>
         <Button className='w-full mb-5 bg-orange-200 hover:bg-orange-300 hover:bg-opacity-80 rounded-none'>ADD TO CART</Button>
         <p>{productInfo.description}</p>
