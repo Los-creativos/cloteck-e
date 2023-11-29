@@ -36,7 +36,7 @@ async function CollectionPage () {
     }
   ]
 
-  collections.forEach((category) => {
+    collections.forEach((category) => {
     const imageURL = imageURLs.find((image) => image.category_id === category.category_id); 
     const slug = category.name.toLowerCase().replace(/\s/g, '-');
     category.url = imageURL ? imageURL.url : ''; 
@@ -51,8 +51,8 @@ async function CollectionPage () {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {collections.map((collection) => (
             <div key={collection.slug} id='alink' className="transform transition duration-300 hover:scale-105 m-5">
-              <Link href={`/collections/${collection.slug}`}>
-                  <Image
+              <Link href={`/collections/${collection.slug}?id=${collection.category_id}`}>
+                 <Image
                     src={collection.url}
                     alt={collection.name}
                     width={350} 
