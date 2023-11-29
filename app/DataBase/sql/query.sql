@@ -1,9 +1,9 @@
 INSERT INTO "Customer" ("name", "last_name", "email", "phone_number", "type_user", "password")
 VALUES
     ('John', 'Doe', 'john@example.com', 123456789, 'Admin', '$2a$10$eKdnOiDdO0dG.U4LPvCEAOZC6R8AvFy3YVibp4uorgiI4oq.ferjy'),
-    ('Jane', 'Smith', 'jane@example.com', 987654321, 'Premium', 'password2'),
+    ('Jane', 'Smith', 'jane@example.com', 987654321, 'Regular', 'password2'),
     ('Alice', 'Johnson', 'alice@example.com', NULL, 'Regular', 'password3'),
-    ('Bob', 'Williams', 'bob@example.com', 555666777, 'Premium', 'password4'),
+    ('Bob', 'Williams', 'bob@example.com', 555666777, 'Regular', 'password4'),
     ('Charlie', 'Brown', 'charlie@example.com', 111222333, 'Regular', 'password5');
 
 INSERT INTO "Product" ("name", "description", "price")
@@ -56,11 +56,11 @@ VALUES
 
 INSERT INTO "Order" ("product_id", "user_id", "size_id", "color_id", "product_quantity", "date")
 VALUES
-    (1, 101, 1, 1, 3, CURRENT_TIMESTAMP),
-    (2, 102, 2, 2, 2, CURRENT_TIMESTAMP),
-    (3, 103, 1, 3, 1, CURRENT_TIMESTAMP),
-    (1, 104, 2, 1, 5, CURRENT_TIMESTAMP),
-    (2, 105, 1, 2, 2, CURRENT_TIMESTAMP);
+    (1, 1, 1, 1, 3, CURRENT_TIMESTAMP),
+    (2, 2, 2, 2, 2, CURRENT_TIMESTAMP),
+    (3, 3, 1, 3, 1, CURRENT_TIMESTAMP),
+    (1, 4, 2, 1, 4, CURRENT_TIMESTAMP),
+    (2, 5, 1, 2, 2, CURRENT_TIMESTAMP);
 
 INSERT INTO "Region" ("name", "taxes")
 VALUES

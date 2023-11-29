@@ -1,5 +1,9 @@
+import ShopCartLayout from "@/app/components/shopcart/ShopCartLayout";
+
 export default function ShopCartPage () {
   return (
-    <h1>This is the Shop Cart Page</h1>
+    <section className='flex items-center justify-center'>
+      <ShopCartLayout />
+    </section>
   )
 }
