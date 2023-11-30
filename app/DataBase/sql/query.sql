@@ -56,11 +56,23 @@ VALUES
 
 INSERT INTO "Order" ("product_id", "user_id", "size_id", "color_id", "product_quantity", "date")
 VALUES
-    (1, 1, 1, 1, 3, CURRENT_TIMESTAMP),
-    (2, 2, 2, 2, 2, CURRENT_TIMESTAMP),
-    (3, 3, 1, 3, 1, CURRENT_TIMESTAMP),
-    (1, 4, 2, 1, 4, CURRENT_TIMESTAMP),
-    (2, 5, 1, 2, 2, CURRENT_TIMESTAMP);
+    (1, 1, 2, 3, 5, CURRENT_TIMESTAMP),
+    (3, 1, 3, 2, 2, CURRENT_TIMESTAMP),
+    (4, 1, 2, 1, 6, CURRENT_TIMESTAMP),
+    (4, 1, 1, 1, 10, CURRENT_TIMESTAMP),
+    (2, 2, 1, 2, 3, CURRENT_TIMESTAMP),
+    (3, 3, 3, 1, 7, CURRENT_TIMESTAMP),
+    (1, 4, 2, 3, 2, CURRENT_TIMESTAMP),
+    (2, 5, 1, 2, 4, CURRENT_TIMESTAMP),
+    (3, 2, 3, 1, 8, CURRENT_TIMESTAMP),
+    (2, 3, 1, 2, 1, CURRENT_TIMESTAMP),
+    (1, 4, 2, 3, 3, CURRENT_TIMESTAMP),
+    (4, 5, 1, 1, 5, CURRENT_TIMESTAMP),
+    (2, 2, 2, 1, 4, CURRENT_TIMESTAMP),
+    (1, 3, 1, 3, 6, CURRENT_TIMESTAMP),
+    (4, 4, 3, 2, 3, CURRENT_TIMESTAMP),
+    (3, 5, 2, 1, 7, CURRENT_TIMESTAMP);
+
 
 INSERT INTO "Region" ("name", "taxes")
 VALUES

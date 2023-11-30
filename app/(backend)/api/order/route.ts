@@ -1,19 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import {createOrderValidator} from "@/app/(backend)/api/order/order.schema";
-import {createOrder, deleteAllOrderByUser} from "@/app/(backend)/api/order/order.service";
+import {createOrder, deleteAllOrderByUser, getOrdersByUser} from "@/app/(backend)/api/order/order.service";
 import {Prisma} from "@prisma/client";
 
 export async function GET () {
     try {
-        const orders = await prisma.order.findMany({
-            include: {
-                product: true,
-                size: true,
-                color: true
-            }
-        })
-
+         const orders = await getOrdersByUser(1)
         return NextResponse.json(orders)
     } catch (error) {
         console.error('Error', error)

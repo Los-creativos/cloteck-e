@@ -22,13 +22,54 @@ export const createOrder = async (input: Prisma.OrderCreateInput) => {
   }
 }
 
-export const getOrdersByUser = async (userId: number) => {
+const getOrdersByUser = async (userId: number) => {
   try {
+    const [productsID, colorsId] = await Promise.all([
+      prisma.order.findMany({
+        where: {
+          user_id: userId,
+        },
+        select: {
+          product_id: true,
+        },
+        distinct: ["product_id"],
+      }),
+      prisma.order.findMany({
+        where: {
+          user_id: userId,
+        },
+        select: {
+          color_id: true,
+        },
+        distinct: ["color_id"],
+      }),
+    ]);
 
+    const max = Math.max(productsID.length, colorsId.length);
+    const orders = await Promise.all(
+      Array.from({ length: max }).map(async (_, index) => {
+        const product = productsID[index];
+        const color = colorsId[index];
+        return await getOrdersForItem(userId, product, color);
+      })
+    );
 
-    const orders = await prisma.order.findMany({
+    return orders;
+  } catch (error) {
+    console.error('Error', error);
+    return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
+  }
+};
+
+export const getOrdersForItem = async (userId: number,
+                                       productId: number,
+                                       colorId: number) => {
+  try {
+    const orderForItem = await prisma.order.findMany( {
       where: {
-        user_id: userId
+        user_id: userId,
+        product_id: productId,
+        color_id: colorId
       },
       include: {
         product: true,
@@ -37,10 +78,11 @@ export const getOrdersByUser = async (userId: number) => {
       }
     })
 
-    return NextResponse.json(orders)
+
+
+    return orderForItem;
   } catch (error) {
-    console.error('Error', error)
-    return NextResponse.json({ error: (error as any).errors }, { status: 400 })
+    return NextResponse.json({error}, { status: 500})
   }
 }
 
