@@ -36,7 +36,7 @@ export default function LoginForm () {
     <form onSubmit={handleOnSubmit} className='grid p-10 gap-y-5 max-w-screen-lg w-full'>
       <InputWithTItle onChange={(e: any) => setEmail(e.target.value)} textarea={false} type='email' title='Email' />
       <InputWithTItle onChange={(e: any) => setPassword(e.target.value)} textarea={false} type='password' title='Password' />
-      <Button text='Login' type='submit' className={'active:scale-95 active:bg-slate-800 hover:bg-slate-800'}/>
+      <Button text='Login' type='submit' className={'bg-black text-white active:scale-95 active:bg-slate-800 hover:bg-slate-800'}/>
       <Toaster />
     </form>
   )

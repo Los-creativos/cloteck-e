@@ -121,7 +121,7 @@ export default function EditProduct({ params }: { params: { data: string } }) {
           <Button
             text='Add'
             type='submit'
-            className='text-xl px-10 py-3 rounded-sm'
+            className='bg-black text-white text-xl px-10 py-3 rounded-sm'
           />
         </div>
       </div>
