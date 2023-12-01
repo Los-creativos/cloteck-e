@@ -49,14 +49,14 @@ const OrderSummary = () => {
         </table>
         <div className="mt-4">
           <div className="flex justify-end">
-            <div className="w-1/2">
-              <p className="text-left">Taxes: </p>
+            <div className="w-1/3">
+              <p className="text-left">Taxes: 8%</p>
             </div>
-            <div className="w-1/2">
-              <p className="text-left">Total:</p>
+            <div className="w-1/3">
+              <p className="text-left">Total: $114.94</p>
             </div>
-            <div className="w-1/2">
-              <p className="text-left">Total with Taxes: </p>
+            <div className="w-1/3 text-center">
+              <p className="text-left">Total with Taxes: $124.14</p>
             </div>
           </div>
         </div>
