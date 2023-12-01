@@ -63,6 +63,7 @@ model Attribute {
   color_id     Int
   quantity     Int
   image        String  @db.Char(100)
+  color        Color   @relation(fields: [color_id], references: [color_id])
   product      Product @relation(fields: [product_id], references: [product_id])
   size         Size    @relation(fields: [size_id], references: [size_id])
 }
