@@ -19,8 +19,9 @@ export default function CategoryPage() {
 
     const fetchCategoryData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/category/${id}`);
+        const response = await fetch(`/api/category/${id}`);
         const data = await response.json();
+        console.log(data)
         setProducts(data.ProductCategory.map(pc => pc.product));
       } catch (error) {
         console.error('Error fetching category:', error);
@@ -30,7 +31,7 @@ export default function CategoryPage() {
     };
 
     fetchCategoryData();
-  }, [id]);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
