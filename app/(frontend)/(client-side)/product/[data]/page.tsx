@@ -1,114 +1,154 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "@/app/components/ui/Button";
 import ColorDisplay from "@/app/components/admin/ColorDisplay";
 
 const ProductDetailPage = ({ params }: { params: { data: string } }) => {
-  const [idSelected, setId] = useState<number>(0);
-  const [sizeSelected, setSizeId] = useState<number>();
-  const [quantity, setQuantity] = useState<number>(0);
-  const [maxQuantity, setMaxQuantity] = useState<number>(0)
   const productInfo = JSON.parse(decodeURIComponent(params.data));
+  const [idSelected, setId] = useState<number>(0);
+  const [sizeSelected, setSizeId] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [uniqueSizes, setUniqueSizes] = useState<string[]>([]);
+  const [uniqueColors, setUniqueColors] = useState<string[]>([]);
+  const [colorImages, setColorImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    const sizes = productInfo.Attribute
+      .filter((att: any) => att.color.name === uniqueColors[idSelected])
+      .map((att: any) => att.size.name);
+    setUniqueSizes(sizes);
+  }, [idSelected, productInfo.Attribute, uniqueColors]);
+
+  useEffect(() => {
+    const colors = productInfo.Attribute.map((att: any) => att.color.name);
+    const uniqueColorSet = new Set<string>(colors);
+    setUniqueColors(Array.from(uniqueColorSet));
+
+    const colorImageMap: Record<string, string> = {};
+    colors.forEach((color: string, index: number) => {
+      if (!(color in colorImageMap)) {
+        colorImageMap[color] = productInfo.Attribute[index].image;
+      }
+    });
+    setColorImages(Object.values(colorImageMap));
+  }, [productInfo.Attribute]);
+
+  const setImage = (i: number) => {
+    setId(i);
+  };
+
+  const handleSizeClick = (sizeId: number) => {
+    setSizeId(sizeId);
+  };
 
   return (
-      <form className="grid grid-cols-1 md:grid-cols-2 p-4 md:p-8">
-        <section className="flex justify-center p-4 h-full w-full">
-          <Image
-              alt={productInfo.name}
-              src={productInfo.Attribute[idSelected ? idSelected : 0].image}
-              width={450}
-              height={450}
-              className="max-h-full w-auto"
-          />
-        </section>
-        <section className="font-normal p-4">
-          <header className="font-semibold text-xl">{productInfo.name}</header>
-          <p>{productInfo.price} BOB</p>
-          <section className="my-3">
-            <p className="mb-3">SIZE</p>
-            <div className="grid grid-cols-3 sm:grid-cols-6 sm:grid-rows-1 grid-flow-row gap-5">
-              {productInfo.Attribute.map((attribute: any, i: number) => {
-                return (
-                    <>
-                      {attribute.size.size_id === sizeSelected ? (
-                          <Button
-                              type="button"
-                              key={i}
-                              className="bg-orange-200 border border-black rounded-none"
-                              onClick={() => setSizeId(attribute.size.size_id)}
-                          >
-                            {attribute.size.name}
-                          </Button>
-                      ) : (
-                          <Button
-                              type="button"
-                              key={i}
-                              className="hover:bg-orange-200 border border-black rounded-none"
-                              onClick={() => setSizeId(attribute.size.size_id)}
-                          >
-                            {attribute.size.name}
-                          </Button>
-                      )}
-                    </>
-                );
-              })}
-            </div>
-          </section>
-          <section>
-            <p className="mb-3">COLOR</p>
-            <div className="grid sm:grid-cols-10 grid-cols-5 sm:grid-rows-1 grid-flow-row gap-2 place-content-center">
-              {productInfo.Attribute.map((attribute: any, i: number) => {
-                return (
-                    <Button
-                        type="button"
-                        key={i}
-                        className="bg-transparent items-center"
-                        onClick={() => setId(i)}
-                    >
-                      <ColorDisplay hexColor={attribute.color.name} diameter={30} />
-                    </Button>
-                );
-              })}
-            </div>
-          </section>
-          <section className="my-3">
-            <p>QUANTITY</p>
-            <div className="flex w-full gap-4 md:place-content-start place-content-center">
+    <form className="grid grid-cols-1 md:grid-cols-2 p-4 md:p-8">
+      <section className="flex justify-center p-4 h-full w-full">
+        <Image
+          alt={productInfo.name}
+          src={colorImages[idSelected]}
+          width={450}
+          height={450}
+          className="max-h-full w-auto"
+        />
+      </section>
+      <section className="font-normal p-4">
+        <header className="font-semibold text-xl">{productInfo.name}</header>
+        <p>{productInfo.price} BOB</p>
+        <section className="my-3">
+          <p className="mb-3">SIZE</p>
+          <div className="grid grid-cols-3 sm:grid-cols-6 sm:grid-rows-1 grid-flow-row gap-5">
+            {uniqueSizes.map((sizeName: string, index: number) => (
               <Button
-                  type="button"
-                  text={"-"}
-                  className="border hover:bg-slate-200"
-                  onClick={() => setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1))}
-
-              />
-              <input
-                  type="number"
-                  value={quantity || 1}
-                  min={1}
-                  max={productInfo.Attribute[idSelected !== undefined ? idSelected : 0]?.quantity || 1}
-                  className="flex w-20 text-center [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-                  onChange={(e) => {
-                    const newValue = parseInt(e.target.value)
-                    setQuantity(newValue > productInfo.Attribute[idSelected !== undefined ? idSelected : 0]?.quantity ? productInfo.Attribute[idSelected !== undefined ? idSelected : 0]?.quantity : Math.max(newValue, 1));
-                  }}
-              />
-              <Button
-                  type="button"
-                  text={"+"}
-                  className="border hover:bg-slate-200"
-                  onClick={() => setQuantity((prevQuantity) => Math.min(prevQuantity + 1, productInfo.Attribute[idSelected !== undefined ? idSelected : 0]?.quantity || 1))}
-              />
-            </div>
-          </section>
-          <Button className="w-full mb-5 bg-orange-200 hover:bg-orange-300 hover:bg-opacity-80 rounded-none">
-            ADD TO CART
-          </Button>
-          <p>DESCRIPTION:</p>
-          <p>{productInfo.description}</p>
+                type="button"
+                key={index}
+                className={`${
+                  sizeSelected === index ? "bg-orange-200" : "hover:bg-orange-200"
+                } border border-black rounded-none`}
+                onClick={() => handleSizeClick(index)}
+              >
+                {sizeName}
+              </Button>
+            ))}
+          </div>
         </section>
-      </form>
+        <section>
+          <p className="mb-3">COLOR</p>
+          <div className="grid sm:grid-cols-10 grid-cols-5 sm:grid-rows-1 grid-flow-row gap-2 place-content-center">
+            {uniqueColors.map((colorName: string, index: number) => (
+              <Button
+                type="button"
+                key={index}
+                className={`${
+                  idSelected === index ? "bg-orange-200" : "hover:bg-orange-200"
+                } border border-black rounded-none`}
+                onClick={() => setImage(index)}
+              >
+                <div
+                  style={{ backgroundColor: colorName }}
+                  className="flex p-0.5 justify-center items-center w-auto border-2 rounded-full"
+                >
+                  <ColorDisplay hexColor={colorName} diameter={30} />
+                </div>
+              </Button>
+            ))}
+          </div>
+        </section>
+        <section className="my-3">
+        <p>QUANTITY</p>
+          <div className="flex w-full gap-4 md:place-content-start place-content-center">
+            <Button
+              type="button"
+              text={"-"}
+              className="border hover:bg-slate-200"
+              onClick={() =>
+                setQuantity((prevQuantity) =>
+                  Math.max(prevQuantity - 1, 1)
+                )
+              }
+            />
+            <input
+              type="number"
+              value={quantity}
+              min={1}
+              max={
+                productInfo.Attribute[idSelected]?.quantity || 1
+              }
+              className="flex w-20 text-center [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+              onChange={(e) => {
+                const newValue = parseInt(e.target.value);
+                setQuantity(
+                  newValue >
+                    productInfo.Attribute[idSelected]?.quantity
+                    ? productInfo.Attribute[idSelected]?.quantity
+                    : Math.max(newValue, 1)
+                );
+              }}
+            />
+            <Button
+              type="button"
+              text={"+"}
+              className="border hover:bg-slate-200"
+              onClick={() =>
+                setQuantity((prevQuantity) =>
+                  Math.min(
+                    prevQuantity + 1,
+                    productInfo.Attribute[idSelected]?.quantity || 1
+                  )
+                )
+              }
+            />
+          </div>
+        </section>
+        <Button className="w-full mb-5 bg-orange-200 hover:bg-orange-300 hover:bg-opacity-80 rounded-none">
+          ADD TO CART
+        </Button>
+        <p>DESCRIPTION:</p>
+        <p>{productInfo.description}</p>
+      </section>
+    </form>
   );
 };
 
