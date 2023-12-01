@@ -54,25 +54,50 @@ VALUES
     (4, 4, 4, 25, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenMenscrew01.jpg?v=1675454919'),
     (5, 5, 5, 30, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
 
-INSERT INTO "Order" ("product_id", "user_id", "size_id", "color_id", "product_quantity", "date")
+INSERT INTO "Order" ("user_id", "date", "active")
 VALUES
-    (1, 1, 2, 3, 5, CURRENT_TIMESTAMP),
-    (3, 1, 3, 2, 2, CURRENT_TIMESTAMP),
-    (4, 1, 2, 1, 6, CURRENT_TIMESTAMP),
-    (4, 1, 1, 1, 10, CURRENT_TIMESTAMP),
-    (2, 2, 1, 2, 3, CURRENT_TIMESTAMP),
-    (3, 3, 3, 1, 7, CURRENT_TIMESTAMP),
-    (1, 4, 2, 3, 2, CURRENT_TIMESTAMP),
-    (2, 5, 1, 2, 4, CURRENT_TIMESTAMP),
-    (3, 2, 3, 1, 8, CURRENT_TIMESTAMP),
-    (2, 3, 1, 2, 1, CURRENT_TIMESTAMP),
-    (1, 4, 2, 3, 3, CURRENT_TIMESTAMP),
-    (4, 5, 1, 1, 5, CURRENT_TIMESTAMP),
-    (2, 2, 2, 1, 4, CURRENT_TIMESTAMP),
-    (1, 3, 1, 3, 6, CURRENT_TIMESTAMP),
-    (4, 4, 3, 2, 3, CURRENT_TIMESTAMP),
-    (3, 5, 2, 1, 7, CURRENT_TIMESTAMP);
+    (1, CURRENT_TIMESTAMP, '1'),
+    (1, CURRENT_TIMESTAMP, '0'),
+    (1, CURRENT_TIMESTAMP, '0'),
+    (1, CURRENT_TIMESTAMP, '0'),
+    (2, CURRENT_TIMESTAMP, '1'),
+    (3, CURRENT_TIMESTAMP, '1'),
+    (4, CURRENT_TIMESTAMP, '1'),
+    (5, CURRENT_TIMESTAMP, '1'),
+    (2, CURRENT_TIMESTAMP, '0'),
+    (3, CURRENT_TIMESTAMP, '0'),
+    (4, CURRENT_TIMESTAMP, '0'),
+    (5, CURRENT_TIMESTAMP, '0'),
+    (2, CURRENT_TIMESTAMP, '0'),
+    (3, CURRENT_TIMESTAMP, '0'),
+    (4, CURRENT_TIMESTAMP, '0'),
+    (5, CURRENT_TIMESTAMP, '0');
 
+INSERT INTO "OrderProduct" ("order_id", "product_id", "size_name", "color_name", "quantity")
+VALUES
+    (1, 1, 'S', '#FF0000', 51),
+    (1, 1, 'M', '#FF0000', 52),
+    (1, 1, 'L', '#FF0000', 53),
+    (1, 1, 'S', '#00FF00', 54),
+    (1, 1, 'M', '#00FF00', 53),
+    (1, 1, 'XL', '#00FF00', 54),
+    (1, 1, 'XXl', '#FF1AAA', 53),
+    (2, 4, 'L', '#0000FF', 5),
+    (2, 4, 'M', '#0000FF', 5),
+    (3, 2, 'XL', '#FFFF00', 5),
+    (3, 4, 'XXL', '#FF00FF', 5),
+    (3, 2, 'S', '#FF0000', 5),
+    (3, 4, 'M', '#00FF00', 5),
+    (3, 2, 'L', '#0000FF', 5),
+    (3, 4, 'XL', '#FFFF00', 5),
+    (3, 2, 'XXL', '#FF00FF', 5),
+    (3, 4, 'S', '#FF0000', 5),
+    (3, 2, 'M', '#00FF00', 5),
+    (3, 4, 'L', '#0000FF', 5),
+    (3, 2, 'XL', '#FFFF00', 5),
+    (3, 4, 'XXL', '#FF00FF', 5),
+    (4, 1, 'S', '#FF0000', 5),
+    (4, 3, 'M', '#00FF00', 5);
 
 INSERT INTO "Region" ("name", "taxes")
 VALUES
