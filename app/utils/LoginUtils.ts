@@ -3,6 +3,7 @@ import { findUserForLogin } from '../(backend)/api/user/user.service'
 import { Customer } from '@prisma/client'
 import { setTokenCookie } from './CookieManagement'
 import { SignJwt } from './JwtUtils'
+import { UserCookies } from '../types'
 
 export const hashPassword = async (password: string) => {
   const hashedPassword = hash(password, 10)
@@ -20,7 +21,7 @@ export const login = async (email: string, password: string) => {
     last_name: user.last_name,
     email: user.email,
     type_user: user.type_user
-  }
+  } as UserCookies
 
   const token = await SignJwt(data, '5h')
   setTokenCookie(token)

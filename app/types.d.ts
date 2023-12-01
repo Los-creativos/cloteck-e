@@ -41,3 +41,10 @@ export interface Product {
   name:        string;
  }
  
+ export interface UserCookies {
+   id: number,
+   name: string,
+   last_name: string,
+   email: string,
+   type_user: string
+ } 

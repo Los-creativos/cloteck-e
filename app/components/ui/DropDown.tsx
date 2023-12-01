@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
-export default function Dropdown({ children, classnameButton, text }: { children: ReactNode; classnameButton?: string; text: string }) {
+export default function Dropdown({ children, classnameButton, text, buttonChildren }: { children: ReactNode; classnameButton?: string; text?: string, buttonChildren?: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -23,9 +23,10 @@ export default function Dropdown({ children, classnameButton, text }: { children
       <div>
         <button
           type="button"
-          className={`bg-slate-300 bg-opacity-50 w-full text-left hover:bg-slate-400 hover:bg-opacity-50 ${classnameButton}`}
+          className={`flex place-items-center bg-slate-300 bg-opacity-50 w-full text-left hover:bg-slate-400 hover:bg-opacity-50 ${classnameButton}`}
           onClick={() => setIsOpen(!isOpen)}
         >
+          {buttonChildren}
           {text}
         </button>
       </div>
