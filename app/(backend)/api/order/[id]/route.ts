@@ -1,16 +1,16 @@
 import {NextRequest, NextResponse} from "next/server";
 import {prisma} from "@/lib/prisma";
 import {ZodError} from "zod";
-import {deleteOrder, getUniqOrder, updateOrder} from "@/app/(backend)/api/order/order.service";
+
 
 export async function GET (
   req: NextRequest,
   { params }: { params: { id: string }; }
 ) {
   try {
-    const uniqueOrder = await getUniqOrder(parseInt(params.id));
+    //const uniqueOrder = await getUniqOrder(parseInt(params.id));
 
-    return NextResponse.json(uniqueOrder)
+    return NextResponse.json("")
   } catch (error) {
     return NextResponse.json({error}, { status: 500})
   }
@@ -23,7 +23,7 @@ export async function PUT (
 ){
   try {
     const data = await req.json()
-    await updateOrder(parseInt(params.id), data.product_quantity)
+   
     return NextResponse.json("Successful order update")
   } catch (error) {
 
@@ -40,7 +40,7 @@ export async function DELETE (
   { params }: { params: { id: string }}
 ) {
   try {
-    await deleteOrder(parseInt(params.id))
+    
     return NextResponse.json("Successful Order Deleted")
   } catch (error) {
     console.error('Error', error)

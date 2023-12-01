@@ -8,8 +8,8 @@ export default function ItemDetailsDisplay({
 }: {
   Size: String;
   Price: number;
-  Stock: number
-  Delete: ReactNode
+  Stock: number;
+  Delete?: ReactNode;
 }) {
   const [subTotal, setSubTotal] = useState<number>()
   const [quantity, setQuantity] = useState<number>(1)
