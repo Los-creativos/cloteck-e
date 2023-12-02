@@ -57,7 +57,7 @@ export default function EditCategory ({params}:{params: {data: string}}) {
               className='3xl:min-h-[57px] lg:min-h-[80px] md:min-h-[120px] sm:min-h-[120px] min-h-[230px] 3xl:max-h-[57px] lg:max-h-[80px] md:max-h-[120px] sm:max-h-[120px] max-h-[230px]'
             />
           <div className='flex justify-between pt-20'>
-            <LinkButton text='Back' className='text-xl px-10 py-3 rounded-sm' href='/admin/category' />
+            <LinkButton text='Back' className='bg-black text-white text-xl px-10 py-3 rounded-sm' href='/admin/category' />
             <Button text='Edit' type='submit' className='bg-black text-white text-xl px-10 py-3 rounded-sm' />
           </div>
         </div>
