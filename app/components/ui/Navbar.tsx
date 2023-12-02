@@ -18,6 +18,7 @@ export default function Navbar({ admin = false }: { admin?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userStatus, setUserStatus] = useState<boolean>();
   const [userData, setUserData] = useState<Customer>();
+  const [isAdmin, setIsAdmin] = useState(false)
   const handleLogOut = () => {
     setUserStatus(false);
     setUserData(undefined);
@@ -29,6 +30,7 @@ export default function Navbar({ admin = false }: { admin?: boolean }) {
       const token = await getTokenCookie();
       const data = (await VerifyJwt(token?.value as string)) as Customer;
       data ? setUserStatus(true) : setUserStatus(false);
+      data.type_user === 'Admin' ? setIsAdmin(true) : setIsAdmin(false)
       data ? setUserData(data) : setUserData(undefined);
     };
     isLogged();
@@ -130,7 +132,7 @@ export default function Navbar({ admin = false }: { admin?: boolean }) {
             {userStatus ? (
               <>
                 <Dropdown
-                  className="min-w-min"
+                  className="min-w-min -left-5"
                   text={userData?.name}
                   classnameButton="flex bg-transparent col-span-2 hover:bg-transparent"
                   buttonChildren={
@@ -157,6 +159,9 @@ export default function Navbar({ admin = false }: { admin?: boolean }) {
                     className="bg-transparent text-black p-2 text-sm"
                     href="/user-preferences"
                   />
+                  {isAdmin && 
+                    <LinkButton className="p-2 text-sm" text='Admin' href="/admin/product"/>
+                  }
                   <Button
                     onClick={() => handleLogOut()}
                     type="button"
@@ -261,6 +266,9 @@ export default function Navbar({ admin = false }: { admin?: boolean }) {
                   className="bg-transparent text-black p-2 text-sm"
                   href="/user-preferences"
                 />
+                {isAdmin && 
+                    <LinkButton className="p-2 text-sm" text='Admin' href="/admin/product"/>
+                  }
                 <Button
                   onClick={() => handleLogOut()}
                   type="button"

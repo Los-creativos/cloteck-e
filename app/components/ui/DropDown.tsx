@@ -32,8 +32,7 @@ export default function Dropdown({ children, classnameButton, text, buttonChildr
       </div>
       {isOpen && (
         <div
-          className={`absolute z-10 mt-2 p-2 w-full shadow-lg rounded-md border bg-gray-300 border-gray-300 md:max-h-48 max-h-32 overflow-y-auto ${className}`}
-          style={{ maxHeight: '8rem' }}
+          className={`absolute z-10 mt-2 p-2 w-full shadow-lg rounded-md border bg-gray-300 border-gray-300 md:max-h-[9rem] max-h-32 overflow-y-auto ${className}`}
         >
           {children}
         </div>
