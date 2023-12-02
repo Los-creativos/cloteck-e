@@ -1,46 +1,48 @@
 'use client'
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import ProductList from '@/app/components/home/ProductLIst';
+import { useEffect, useState } from 'react';
 
 export default function CategoryPage() {
-  const params = useParams();
-  const slug = params.slug;
-  const id = params.id;
-
-  //TODO: poner imagen del primer porducto en la categorioa, si no tiene no se muestra
-  // You can then use either `slug` or `id` to fetch your data
-  // For demonstration, let's assume we use `id` to fetch category data
-  const [products, setProducts] = useState([]);
+  const { slug } = useParams(); 
+  const [category, setCategory] = useState(null);
   const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const categoryId = searchParams.get('id');
+
 
   useEffect(() => {
-    if (!id) return;
-
-    const fetchCategoryData = async () => {
-      try {
-        const response = await fetch(`/api/category/${id}`);
-        const data = await response.json();
-        console.log(data)
-        setProducts(data.ProductCategory.map(pc => pc.product));
-      } catch (error) {
-        console.error('Error fetching category:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategoryData();
-  }, []);
+    if (categoryId) {
+      fetch(`/api/category/${categoryId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCategory(data);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    }
+  }, [slug]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='container justify-center'>Loading...</div>;
   }
 
+  if (!category) {
+    return <div  className='container justify-center'>Category not found or error in loading</div>;
+  }
+
+
   return (
-    <div>
-      <h1>{`Products for Category ${slug}`}</h1>
-      <ProductList products={products} />
-    </div>
+  <div className="flex flex-col p-6 my-0">
+    <h1 className="text-4xl font-bold text-center my-4">{category.name}</h1>
+    <p className="text-lg text-gray-600 text-center mb-10">{category.description}</p>
+  
+    {Array.isArray(category.ProductCategory) && category.ProductCategory.length > 0 ? (
+      <ProductList products={category.ProductCategory.map(pc => pc.product)} />
+    ) : (
+      <p className="text-center text-xl text-gray-500">No products available for this category.</p>
+    )}
+</div>
+
   );
 }

@@ -20,7 +20,11 @@ export async function GET(
       include: {
         ProductCategory: {
           include: {
-            product: true
+            product: {
+              include: {
+                Attribute: true,
+              }
+            }
           },
           orderBy: {
             product_id: 'asc'
