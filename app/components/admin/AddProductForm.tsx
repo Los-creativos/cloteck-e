@@ -73,7 +73,24 @@ export default function AddProductForm() {
           image: uploadedImageData.secure_url,
         };
         createAttributeSchema.parse(attribute);
-        setAttributes([...attributes, attribute]);
+        let alreadyExist = false
+        attributes.forEach(element => {          
+          if (element.color == attribute.color && element.size == attribute.size) {
+            alreadyExist = true;
+            dismissToasts()
+          }
+        });
+        if (!alreadyExist) {
+          setAttributes([...attributes, attribute])
+          dismissToasts(),
+          toast.success("Attribute added", {
+            position: "top-left",
+          })
+        } else {
+          toast.error("This attribute already exists", {
+            position: "top-left",
+          })
+        }
       } catch (error) {
         if (error instanceof ZodError) {
           dismissToasts();
