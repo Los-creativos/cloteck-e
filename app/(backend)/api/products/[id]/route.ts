@@ -45,6 +45,11 @@ export async function DELETE (
           product_id: parseInt(params.id)
         }
       }),
+      prisma.orderProduct.deleteMany({
+        where: {
+          product_id: parseInt(params.id)
+        }
+      }),
       prisma.product.delete({
         where: {
           product_id: parseInt(params.id)

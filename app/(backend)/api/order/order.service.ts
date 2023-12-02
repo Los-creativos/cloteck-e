@@ -1,7 +1,6 @@
 'use server'
 
 import { prisma } from "@/lib/prisma";
-import {Prisma, Order} from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import {createOrderValidator, updateOrderValidator} from "@/app/(backend)/api/order/order.schema";
@@ -58,7 +57,28 @@ export const createOrderProduct = async (productID: number,
   }
 }
 
-export const getOrdersByUser = async (userID: number, productID: number) => {
+export const getOrdersByUser = async (userID: number) => {
+  try {
+    const order = await prisma.order.findMany({
+      where: {
+        user_id: userID,
+        active: true
+      }, include: {
+        OrderProduct: true
+      }
+    })
+    // if (!order) {
+    //   throw new Error("Order Not Found")
+    // }
+
+    return order;
+  } catch (error) {
+    console.error('Error', error);
+    return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
+  }
+};
+
+export const getOrdersByItems = async (userID: number, productID: number) => {
   try {
     const order = await prisma.order.findFirst({
       where: {
@@ -97,6 +117,28 @@ export const getOrdersByUser = async (userID: number, productID: number) => {
     return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
   }
 };
+
+export const getOrderById = async (orderID: number) => {
+  try {
+    const order = await prisma.order.findUnique({
+      where: {
+        order_id: orderID
+      },
+      include: {
+        customer: true,
+        OrderProduct: {
+          include: {
+            Product: true
+          }
+        }
+      }
+    })
+    return order
+  } catch (error) {
+    return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
+  }
+}
+
 
 export const updateOrderStatus = async (orderId: number, active: boolean) => {
   try {
