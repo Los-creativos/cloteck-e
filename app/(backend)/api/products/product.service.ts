@@ -1,3 +1,5 @@
+'use server'
+
 import { Prisma, Product } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 
@@ -32,10 +34,28 @@ export const findAllProducts = async (
 ) => {
   const take = limit || 10
   const skip = (page - 1) * limit
-  return await prisma.product.findMany({
+  const products = await prisma.product.findMany({
     skip,
-    take
+    take,
+    include: {
+      ProductCategory: {
+        include: {
+          category: true
+        }
+      },
+      Attribute: {
+        include: {
+          size: true,
+          color: true,
+        }
+      }
+    },
+    orderBy: {
+      name: 'asc'
+    }
   }) as Product[]
+  prisma.$disconnect()
+  return products
 }
 
 export const updateProduct = async (
