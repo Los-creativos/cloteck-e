@@ -77,6 +77,7 @@ CREATE TABLE "OrderProduct" (
 "size_name" CHAR (50) NOT NULL,
 "color_name" CHAR (50) NOT NULL,
 "quantity" INTEGER NOT NULL,
+"image" CHAR (100) NOT NULL,
 
 CONSTRAINT "OrderProduct_pkey" PRIMARY KEY ("order_product_id"),
 CONSTRAINT "OrderProduct_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "Order"("order_id") ON DELETE CASCADE ON UPDATE CASCADE,
