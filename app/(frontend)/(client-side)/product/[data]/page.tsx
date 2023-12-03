@@ -14,7 +14,7 @@ const ProductDetailPage = ({ params }: { params: { data: string } }) => {
   const [uniqueColors, setUniqueColors] = useState<string[]>([]);
   const [colorImages, setColorImages] = useState<string[]>([]);
 
-  useEffect(() => {
+  useEffect(() => {    
     const sizes = productInfo.Attribute
       .filter((att: any) => att.color.name === uniqueColors[idSelected])
       .map((att: any) => att.size.name);
@@ -29,7 +29,7 @@ const ProductDetailPage = ({ params }: { params: { data: string } }) => {
     const colorImageMap: Record<string, string> = {};
     colors.forEach((color: string, index: number) => {
       if (!(color in colorImageMap)) {
-        colorImageMap[color] = productInfo.Attribute[index].image;
+        colorImageMap[color] = productInfo.Attribute[index].image.trim();
       }
     });
     setColorImages(Object.values(colorImageMap));

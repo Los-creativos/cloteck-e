@@ -105,7 +105,7 @@ export default function EditProduct({ params }: { params: { data: string } }) {
               <AttributeDisplay
                 key={i}
                 color={attribute.color.name}
-                image={attribute.image}
+                image={attribute.image.trim()}
                 quantity={attribute.quantity}
                 size={attribute.size.name}
               />
