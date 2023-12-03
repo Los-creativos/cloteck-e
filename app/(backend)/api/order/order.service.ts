@@ -76,7 +76,7 @@ export const getOrdersByUser = async (userID: number) => {
       throw new Error("Order Not Found")
     }
 
-    return order;
+    return NextResponse.json(order.order_id);
   } catch (error) {
     console.error('Error', error);
     return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
@@ -116,6 +116,7 @@ export const getOrdersByItems = async (userID: number) => {
       } else {
         productMap.set(key, productList.length);
         productList.push({
+          id: order.order_id,
           title: orderProduct.Product.name,
           description: orderProduct.Product.description,
           price: orderProduct.Product.price.toNumber(),

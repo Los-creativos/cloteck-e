@@ -5,6 +5,10 @@ import Image from "next/image";
 import Button from "@/app/components/ui/Button";
 import ColorDisplay from "@/app/components/admin/ColorDisplay";
 import {createOrderProduct} from "@/app/(backend)/api/order/order.service";
+import {getTokenCookie} from "@/app/utils/CookieManagement";
+import {VerifyJwt} from "@/app/utils/JwtUtils";
+import {Customer} from "@prisma/client";
+import {useRouter} from "next/navigation";
 
 const ProductDetailPage = ({ params }: { params: { data: string } }) => {
   const productInfo = JSON.parse(decodeURIComponent(params.data));
@@ -14,6 +18,7 @@ const ProductDetailPage = ({ params }: { params: { data: string } }) => {
   const [uniqueSizes, setUniqueSizes] = useState<string[]>([]);
   const [uniqueColors, setUniqueColors] = useState<string[]>([]);
   const [colorImages, setColorImages] = useState<string[]>([]);
+  const router = useRouter()
 
   useEffect(() => {
     const sizes = productInfo.Attribute
@@ -49,6 +54,12 @@ const ProductDetailPage = ({ params }: { params: { data: string } }) => {
 
     console.log("ADD TO CARTT")
     try {
+      const token = await getTokenCookie()
+      const data = await VerifyJwt(token?.value as string) as Customer
+      if (!data) {
+        router.push('/login')
+        return;
+      }
       console.log("Inside")
       const response = await createOrderProduct( 1, "asdas", "asdasd" , 123, "adsd")
       console.log("Inside222")

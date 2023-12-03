@@ -6,13 +6,20 @@ import Button from "@/app/components/ui/Button";
 import LinkButton from "@/app/components/ui/LinkButton";
 import {clearOrders, getOrdersByItems, getOrdersByUser} from "@/app/(backend)/api/order/order.service";
 import { OrderProduct } from '@/app/(backend)/api/order/order-dto'
+import {getTokenCookie} from "@/app/utils/CookieManagement";
+import {VerifyJwt} from "@/app/utils/JwtUtils";
+import {Customer} from "@prisma/client";
 export default function ShopCartLayout () {
   const [orders, setOrders] = useState<OrderProduct[]>()
-
-  const productOrders = () => {
+  const [orderId, setOrderId] = useState<number>()
+  const [userId, setUserId] = useState<number>()
+  const productOrders = async () => {
     try {
-      const userID = 1
-      getOrdersByItems(userID)
+      const token = await getTokenCookie()
+      const data = await VerifyJwt(token?.value as string) as Customer
+      console.log(data)
+      setUserId(data.customer_id)
+      getOrdersByItems(1)
       .then((response)=> response)
       .then((data) => {
         if(!data) {
@@ -30,6 +37,7 @@ export default function ShopCartLayout () {
     productOrders()
   }, []);
   const clearCartHandle = async () => {
+
     try {
       const response = await clearOrders()
       if (response) {
@@ -75,7 +83,7 @@ export default function ShopCartLayout () {
             <h1 className='justify-between'>ORDER TOTAL</h1>
             <p> Bs. 332</p>
           </div>
-          <LinkButton href={'/invoice'} text={"CHECK OUT"} className=' w-full bg-amber-500 '/>
+          <LinkButton href={`/invoice/1`} text={"CHECK OUT"} className=' w-full bg-amber-500 '/>
           <div className='w-full text-center'>
             <LinkButton
               href={"/"}
