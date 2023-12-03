@@ -4,17 +4,24 @@ import { Fragment, useEffect, useState } from 'react'
 import ProductDisplay from './ProductDisplay'
 import Button from '@/app/components/ui/Button'
 import LinkButton from '@/app/components/ui/LinkButton'
+import { findAllProducts } from '@/app/(backend)/api/products/product.service'
 
-export default function ProductsLayout () {
+export default function ProductsLayout ({page}: {page: string}) {
   const [products, setProducts] = useState<any[]>([])
+  const [nextPageProducts, setNextPageProducts] = useState<any[]>([])
+  const pageInt = parseInt(page)
+  const lastPage = pageInt - 1;
+  const nextPage = pageInt + 1;
 
-  const fetchProducts = () => {
-    fetch('/api/products')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
+  const fetchProducts = async () => {
+    const res = await findAllProducts(pageInt, 25)
+    const nextRes = await findAllProducts(2, 25)
+    setNextPageProducts(nextRes)
+    setProducts(res)
   }
   
   useEffect(() => {
+    console.log(nextPageProducts)
     fetchProducts()
   }, [])
     
@@ -103,6 +110,38 @@ export default function ProductsLayout () {
           )
         })}
       </>
+      <div className='flex justify-center items-center'>
+        {pageInt > 1 && (
+          <LinkButton
+            className='bg-transparent'
+            href={`/admin/product/${lastPage}`}
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+            >
+              <path d='M0 12l9 8v-6h15v-4h-15v-6z' />
+            </svg>
+          </LinkButton>
+        )}
+        {nextPageProducts.length > 0 && (
+          <LinkButton
+            className='bg-transparent'
+            href={`/admin/product/${nextPage}`}
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+            >
+              <path d='M24 12l-9-8v6h-15v4h15v6z' />
+            </svg>
+          </LinkButton>
+        )}
+      </div>
     </div>
   )
 }
