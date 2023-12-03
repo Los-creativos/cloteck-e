@@ -73,31 +73,26 @@ VALUES
     (4, CURRENT_TIMESTAMP, '0'),
     (5, CURRENT_TIMESTAMP, '0');
 
-INSERT INTO "OrderProduct" ("order_id", "product_id", "size_name", "color_name", "quantity")
+INSERT INTO "OrderProduct" ("order_id", "product_id", "size_name", "color_name", "quantity", "image")
 VALUES
-    (1, 1, 'S', '#FF0000', 51),
-    (1, 1, 'M', '#FF0000', 52),
-    (1, 1, 'L', '#FF0000', 53),
-    (1, 1, 'S', '#00FF00', 54),
-    (1, 1, 'M', '#00FF00', 53),
-    (1, 1, 'XL', '#00FF00', 54),
-    (1, 1, 'XXl', '#FF1AAA', 53),
-    (2, 4, 'L', '#0000FF', 5),
-    (2, 4, 'M', '#0000FF', 5),
-    (3, 2, 'XL', '#FFFF00', 5),
-    (3, 4, 'XXL', '#FF00FF', 5),
-    (3, 2, 'S', '#FF0000', 5),
-    (3, 4, 'M', '#00FF00', 5),
-    (3, 2, 'L', '#0000FF', 5),
-    (3, 4, 'XL', '#FFFF00', 5),
-    (3, 2, 'XXL', '#FF00FF', 5),
-    (3, 4, 'S', '#FF0000', 5),
-    (3, 2, 'M', '#00FF00', 5),
-    (3, 4, 'L', '#0000FF', 5),
-    (3, 2, 'XL', '#FFFF00', 5),
-    (3, 4, 'XXL', '#FF00FF', 5),
-    (4, 1, 'S', '#FF0000', 5),
-    (4, 3, 'M', '#00FF00', 5);
+
+    (1, 1, 'L', '#FF0000', 23, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (1, 1, 'S', '#00FF00', 24, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    (1, 1, 'M', '#00FF00', 25, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (1, 1, 'S', '#FF0000', 21, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenMenscrew01.jpg?v=1675454919'),
+    (1, 1, 'M', '#FF0000', 22, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    (1, 1, 'XL', '#00FF00', 26, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    (1, 3, 'XL', '#00FF00', 29, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    (1, 4, 'XL', '#00FF00', 30, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    (1, 1, 'XXl', '#FF1AAA', 27, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    (1, 2, 'XL', '#00FF00', 28, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
+    (2, 4, 'L', '#0000FF', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (2, 4, 'M', '#0000FF', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (3, 2, 'XL', '#FFFF00', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (3, 4, 'XXL', '#FF00FF', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (3, 2, 'S', '#FF0000', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (3, 4, 'M', '#00FF00', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (3, 2, 'L', '#0000FF', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
 
 INSERT INTO "Region" ("name", "taxes")
 VALUES

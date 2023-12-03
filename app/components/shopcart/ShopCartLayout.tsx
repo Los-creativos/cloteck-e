@@ -4,81 +4,62 @@ import { useEffect, useState } from 'react'
 import ShopCartItemDisplay from "@/app/components/shopcart/ShopCartItemDisplay";
 import Button from "@/app/components/ui/Button";
 import LinkButton from "@/app/components/ui/LinkButton";
-
-interface Product {
-  Image: string;
-  Title: string;
-  Description: string;
-  Price: number;
-  Color: string;
-  Sizes: string[];
-  Stocks: number[];
-}
-
-const initialProductList: Product[] = [
-  {
-    Image: 'image_url_1',
-    Title: 'Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1',
-    Description: 'Description for Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1 Product 1',
-    Price: 19.99,
-    Color: 'Blue',
-    Sizes: ['Small', 'Medium', 'Large'],
-    Stocks: [10, 15, 20]
-  },
-  {
-    Image: 'image_url_2',
-    Title: 'Product 2',
-    Description: 'Description for Product 2',
-    Price: 29.99,
-    Color: 'Red',
-    Sizes: ['Medium', 'Large', 'X-Large'],
-    Stocks: [12, 18, 25]
-  },
-  {
-    Image: 'image_url_2',
-    Title: 'Product 2',
-    Description: 'Description for Product 2',
-    Price: 29.99,
-    Color: 'Red',
-    Sizes: ['Medium', 'Large', 'X-Large'],
-    Stocks: [12, 18, 25]
-  },
-  {
-    Image: 'image_url_2',
-    Title: 'Product 2',
-    Description: 'Description for Product 2',
-    Price: 29.99,
-    Color: 'Red',
-    Sizes: ['Medium', 'Large', 'X-Large'],
-    Stocks: [12, 18, 25]
-  },
-];
-
+import {getOrdersByItems, getOrdersByUser} from "@/app/(backend)/api/order/order.service";
+import { OrderProduct } from '@/app/(backend)/api/order/order-dto'
 export default function ShopCartLayout () {
-  const [orders, setOrders] = useState<Product[]>(initialProductList)
+  const [orders, setOrders] = useState<OrderProduct[]>()
 
+  const productOrders = () => {
+    try {
+      const userID = 1
+      getOrdersByItems(userID)
+      .then((response)=> response)
+      .then((data) => {
+        if(!data) {
+          throw new Error();
+        }
+        // @ts-ignore
+        setOrders(data)
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    productOrders()
+  }, []);
+  const clearCartHandle = () => {
+    console.log("ACA ENTRO")
+    console.log(orders?.map((order) => {
+      console.log(order.color)
+    }))
+    console.log("ACA Salgo")
+
+  }
   return (
     <div className= 'w-full md:px-14'>
       <div>
         <h1 className= 'text-3xl md:mx-0 px-4 font-semibold'> YOUR CART </h1>
         <div className= 'w-full text-end p-2'>
           <Button text={"Clear Cart"}
+                  onClick={clearCartHandle}
                   className= 'underline text-black place-self-end'/>
         </div>
       </div>
       <div className='border-t border-black'/>
       <div className= 'overflow-y-scroll lg:h-[50vh] h-[45vh]'>
-        {orders.map((order) => {
+        {orders?.map((order) => {
           return (
             <ShopCartItemDisplay
               key={crypto.randomUUID()}
-              image={order.Image}
-              Title={order.Title}
-              Description={order.Description}
-              Price={order.Price}
-              color={order.Color}
-              Sizes={order.Sizes}
-              Stocks={order.Stocks}/>
+              image={order.image}
+              Title={order.title}
+              Description={order.description}
+              Price={order.price}
+              color={order.color}
+              Sizes={order.sizes}
+              Stocks={order.quantity}/>
           )
         })}
       </div>

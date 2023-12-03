@@ -1,7 +1,6 @@
 'use client'
 
 import React, {useState} from "react";
-import {Order} from "@prisma/client";
 import Image from "next/image"
 import ItemDetailsDisplay from "@/app/components/shopcart/ItemDetailsDisplay";
 import Button from "@/app/components/ui/Button";
@@ -30,9 +29,8 @@ export default function ShopCartItemDisplay({
     number: Stocks[stock]
   }));
 
-  const deleteHandleOnClick = async (size: string, stock: number)=>  {
+  const deleteHandleOnClick = async ()=>  {
     try {
-      combinedElements.splice(combinedElements.indexOf({size: size, number: stock}), 1)
     } catch (error) {
       console.error("Error:", error)
     }
@@ -42,8 +40,10 @@ export default function ShopCartItemDisplay({
     <div className='grid lg:grid-cols-3 gap-2 border-b border-black mb-4'>
       <div className= 'lg:col-span-2 flex p-4'>
         <Image
-          src={a}
+          src={image}
           alt=''
+          width={120}
+          height={120}
           className="max-h-52 w-auto mr-4 border-2 p-2"
         />
         <div className='flex flex-col justify-center p-2 gap-4'>
@@ -51,7 +51,7 @@ export default function ShopCartItemDisplay({
           <div>{Description}</div>
           <div> Price: Bs. {Price} </div>
           <div className='flex gap-2'>Color:
-            <ColorDisplay hexColor={'#4e2323'} diameter={25}/>
+            <ColorDisplay hexColor={color} diameter={25}/>
           </div>
 
         </div>
@@ -73,8 +73,8 @@ export default function ShopCartItemDisplay({
                 Price={Price}
                 Stock={order.number}
                 Delete= {
-                  <Button className='bg-transparent' onClick={() =>
-                    deleteHandleOnClick(order.size, order.number)}>
+                  <Button className='bg-transparent'
+                          onClick={() => deleteHandleOnClick()}>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       width='24'
