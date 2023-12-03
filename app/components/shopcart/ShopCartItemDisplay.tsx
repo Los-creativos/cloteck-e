@@ -38,12 +38,12 @@ export default function ShopCartItemDisplay({
 
   return (
     <div className='grid lg:grid-cols-3 gap-2 border-b border-black mb-4'>
-      <div className= 'lg:col-span-2 flex p-4'>
+      <div className= 'grid lg:col-span-2 xl:flex p-4'>
         <Image
           src={image}
           alt=''
-          width={120}
-          height={120}
+          width={220}
+          height={220}
           className="max-h-52 w-auto mr-4 border-2 p-2"
         />
         <div className='flex flex-col justify-center p-2 gap-4'>
@@ -59,7 +59,7 @@ export default function ShopCartItemDisplay({
       <div className= 'lg:col-span-1 mr-10 '>
         <div className= 'lg:hidden border-b border-black'/>
         <div className= 'xl:grid hidden border-b border-black lg:grid-cols-6 lg:grid-rows-1 p-4'>
-          <div className= 'flex col-span-1 justify-center items-center '> Size </div>
+          <div className= 'flex col-span-2 w-full items-center '> Size </div>
           <div className= 'flex col-span-1 justify-center items-center'> Quantity </div>
           <div className= 'flex col-span-3 justify-center items-center'>Subtotal</div>
         </div>
