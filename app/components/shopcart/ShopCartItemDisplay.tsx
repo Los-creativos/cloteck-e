@@ -38,7 +38,7 @@ export default function ShopCartItemDisplay({
 
   return (
     <div className='grid lg:grid-cols-3 gap-2 border-b border-black mb-4'>
-      <div className= 'lg:col-span-2 flex p-4'>
+      <div className= 'grid lg:col-span-2 xl:flex p-4'>
         <Image
           src={image}
           alt=''

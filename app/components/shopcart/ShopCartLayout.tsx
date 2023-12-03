@@ -45,7 +45,7 @@ export default function ShopCartLayout () {
       } else {
         alert("A error ocurred, please try again")
       }
-
+      await productOrders()
     } catch (error) {
       console.error(error)
     }
@@ -62,7 +62,7 @@ export default function ShopCartLayout () {
         </div>
       </div>
       <div className='border-t border-black'/>
-      <div className= 'overflow-y-scroll lg:h-[50vh] h-[45vh]'>
+      <div className= 'overflow-y-scroll lg:h-[50vh] md:h-[45vh] h-[40vh]'>
         {orders?.map((order) => {
           return (
             <ShopCartItemDisplay
