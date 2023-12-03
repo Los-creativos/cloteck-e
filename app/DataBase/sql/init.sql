@@ -55,7 +55,7 @@ CREATE TABLE "Attribute" (
 "size_id" INTEGER NOT NULL,
 "color_id" INTEGER NOT NULL,
 "quantity" INTEGER NOT NULL,
-"image" CHAR(100) NOT NULL,
+"image" CHAR(500) NOT NULL,
 
 CONSTRAINT "Attribute_pkey" PRIMARY KEY ("attribute_id")
 );
