@@ -12,7 +12,7 @@ import Link from 'next/link';
       <div id="alink" className="flex flex-col items-center p-4 rounded-lg transform transition duration-500 hover:scale-105">
         <div className='relative h-72 w-full mb-4'>
           <Image src={product.Attribute[0].image.trim()} alt={product.name} width={300} height={300} 
-                 className="rounded-lg" loading="lazy" />
+                 className="rounded-lg w-[300px] h-[300px]" loading="lazy" />
         </div>
         <div className='w-full text-left'>
           <h3 className="font-bold line-clamp-2 sm:text-2xl md:text-xl w-full mb-2">{product.name}</h3>
