@@ -111,6 +111,7 @@ export const getOrdersByItems = async (userID: number) => {
         const index = productMap.get(key) as number;
         productList[index].sizes.push(orderProduct.size_name.trim());
         productList[index].quantity.push(orderProduct.quantity);
+        productList[index].orderProduct.push(orderProduct.order_product_id);
         //productList[index].stock.push(orderProduct.Product);
       } else {
         productMap.set(key, productList.length);
@@ -121,6 +122,7 @@ export const getOrdersByItems = async (userID: number) => {
           image: orderProduct.image.trim(),
           color: colorName,
           sizes: [orderProduct.size_name.trim()],
+          orderProduct: [],
           quantity: [orderProduct.quantity],
           stock: []
         });
@@ -172,11 +174,28 @@ export const updateProductOrderStatus = async (productOrderId: number, quantity:
   }
 }
 
-export const clearOrder = async () => {
+export const deleteOrderProduct = async (orderID: number, size: string, color: string) => {
+  try {
+    await prisma.orderProduct.delete({
+      where: {
+        order_product_id: orderID,
+        size_name: size,
+        color_name: color
+      }
+    })
+
+    return NextResponse.json("Successful delete", {status: 200})
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const clearOrders = async () => {
   try {
     await prisma.order.deleteMany({
       where: {}
     });
+    return "Successful Clear Cart";
   } catch (error) {
     return NextResponse.json({ error: (error as any).errors }, { status: 500 })
   }

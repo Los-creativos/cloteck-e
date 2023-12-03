@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "@/app/components/ui/Button";
 import ColorDisplay from "@/app/components/admin/ColorDisplay";
+import {createOrderProduct} from "@/app/(backend)/api/order/order.service";
 
 const ProductDetailPage = ({ params }: { params: { data: string } }) => {
   const productInfo = JSON.parse(decodeURIComponent(params.data));
@@ -43,8 +44,28 @@ const ProductDetailPage = ({ params }: { params: { data: string } }) => {
     setSizeId(sizeId);
   };
 
+  const addToCartHandle = async (e: any) => {
+    e.preventDefault()
+
+    console.log("ADD TO CARTT")
+    try {
+      console.log("Inside")
+      const response = await createOrderProduct( 1, "asdas", "asdasd" , 123, "adsd")
+      console.log("Inside222")
+      if (response) {
+        alert("Product Added to Shop Cart")
+      } else {
+        alert("Product Not Added, Please Try Again")
+      }
+    } catch (error) {
+      console.error(error)
+    }
+
+  }
+
   return (
-    <form className="grid grid-cols-1 md:grid-cols-2 p-4 md:p-8">
+    <form onSubmit={addToCartHandle}
+      className="grid grid-cols-1 md:grid-cols-2 p-4 md:p-8">
       <section className="flex justify-center p-4 h-full w-full">
         <Image
           alt={productInfo.name}
@@ -142,7 +163,9 @@ const ProductDetailPage = ({ params }: { params: { data: string } }) => {
             />
           </div>
         </section>
-        <Button className="w-full mb-5 bg-orange-200 hover:bg-orange-300 hover:bg-opacity-80 rounded-none">
+        <Button
+          type='submit'
+          className="w-full mb-5 bg-orange-200 hover:bg-orange-300 hover:bg-opacity-80 rounded-none">
           ADD TO CART
         </Button>
         <p>DESCRIPTION:</p>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import ShopCartItemDisplay from "@/app/components/shopcart/ShopCartItemDisplay";
 import Button from "@/app/components/ui/Button";
 import LinkButton from "@/app/components/ui/LinkButton";
-import {getOrdersByItems, getOrdersByUser} from "@/app/(backend)/api/order/order.service";
+import {clearOrders, getOrdersByItems, getOrdersByUser} from "@/app/(backend)/api/order/order.service";
 import { OrderProduct } from '@/app/(backend)/api/order/order-dto'
 export default function ShopCartLayout () {
   const [orders, setOrders] = useState<OrderProduct[]>()
@@ -29,14 +29,20 @@ export default function ShopCartLayout () {
   useEffect(() => {
     productOrders()
   }, []);
-  const clearCartHandle = () => {
-    console.log("ACA ENTRO")
-    console.log(orders?.map((order) => {
-      console.log(order.color)
-    }))
-    console.log("ACA Salgo")
+  const clearCartHandle = async () => {
+    try {
+      const response = await clearOrders()
+      if (response) {
+        alert("Successful Clear the cart")
+      } else {
+        alert("A error ocurred, please try again")
+      }
 
+    } catch (error) {
+      console.error(error)
+    }
   }
+
   return (
     <div className= 'w-full md:px-14'>
       <div>
@@ -69,9 +75,11 @@ export default function ShopCartLayout () {
             <h1 className='justify-between'>ORDER TOTAL</h1>
             <p> Bs. 332</p>
           </div>
-          <Button text={"CHECK OUT"} className=' w-full bg-amber-500 '/>
+          <LinkButton href={'/invoice'} text={"CHECK OUT"} className=' w-full bg-amber-500 '/>
           <div className='w-full text-center'>
-            <LinkButton className='text-black text-sm underline'> Continue Shopping </LinkButton>
+            <LinkButton
+              href={"/"}
+              className='text-black text-sm underline'> Continue Shopping </LinkButton>
           </div>
         </section>
       </div>
