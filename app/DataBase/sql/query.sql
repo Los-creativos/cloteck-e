@@ -12,7 +12,8 @@ VALUES
     ('Product 2', 'Description 2', 29.92),
     ('Product 3', 'Description 3', 39.29),
     ('Product 4', 'Description 4', 49.49),
-    ('Product 5', 'Description 5', 59.79);
+    ('Product 5', 'Description 5', 59.79),
+    ('A really Large Name of a product', 'A really Large Description of a the products Please not more', 59.79);
 
 INSERT INTO "Category" ("name", "description")
 VALUES
@@ -52,7 +53,8 @@ VALUES
     (2, 2, 2, 15, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenSweatpants01.jpg?v=1675455387'),
     (3, 3, 3, 20, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenTshirt01.jpg?v=1675455410'),
     (4, 4, 4, 25, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenMenscrew01.jpg?v=1675454919'),
-    (5, 5, 5, 30, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
+    (5, 5, 5, 30, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
+    (6, 5, 5, 30, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
 
 INSERT INTO "Order" ("user_id", "date", "active")
 VALUES
@@ -92,7 +94,7 @@ VALUES
     (3, 4, 'XXL', '#FF00FF', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
     (3, 2, 'S', '#FF0000', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
     (3, 4, 'M', '#00FF00', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375'),
-    (3, 2, 'L', '#0000FF', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
+    (1, 6, 'L', '#0000FF', 5, 'https://cdn.shopify.com/s/files/1/0688/1755/1382/products/GreenWomenscrew01.jpg?v=1675453375');
 
 INSERT INTO "Region" ("name", "taxes")
 VALUES
