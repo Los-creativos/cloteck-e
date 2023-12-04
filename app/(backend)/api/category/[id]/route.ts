@@ -22,7 +22,12 @@ export async function GET(
           include: {
             product: {
               include: {
-                Attribute: true,
+                Attribute: {
+                  include: {
+                    color: true,
+                    size: true
+                  }
+                },
               }
             }
           },
@@ -30,7 +35,7 @@ export async function GET(
             product_id: 'asc'
           },
           
-        }
+        },
       },
 
     })
