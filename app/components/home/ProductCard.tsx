@@ -2,13 +2,15 @@ import { Product } from '@/app/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-  interface ProductCardProps {
-    product: Product;
-  }
+interface ProductCardProps {
+  product: Product;
+}
 
-  const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-    return (
-      <Link href={`/product/${encodeURIComponent(JSON.stringify(product))}`} passHref>
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const imageUrl = product.Attribute?.[0].image; // Provide a default image URL
+
+  return (
+    <Link href={`/product/${encodeURIComponent(JSON.stringify(product))}`} passHref>
       <div id="alink" className="flex flex-col items-center p-4 rounded-lg transform transition duration-500 hover:scale-105">
         <div className='relative h-72 w-full mb-4'>
           <Image src={product.Attribute[0].image.trim()} alt={product.name} width={300} height={300} 
@@ -19,8 +21,8 @@ import Link from 'next/link';
           <p className="text-gray-600 text-base sm:text-lg">{product.price} BOB</p>
         </div>      
       </div>
-      </Link>
-    );
-  };
+    </Link>
+  );
+};
 
-  export default ProductCard;
+export default ProductCard;

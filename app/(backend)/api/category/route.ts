@@ -35,11 +35,15 @@ export async function POST(req: NextRequest) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: (error as any).errors }, { status: 400 })
     }
+    //TODO: cerrar prisma en el finally
+
     return NextResponse.json({ error: (error as any).errors }, { status: 500 })
+    
   }
 }
 
 export async function DELETE () {
   await prisma.category.deleteMany()
   return NextResponse.json('Successful All items of Category')
+  //TODO: agregar mensaje de confirmación
 }

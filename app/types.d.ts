@@ -33,11 +33,25 @@ export interface Product {
   category_id:         number;
   product_category_id: number;
   product_id:          number;
+  product:             Product;
+ }
+
+ export interface CategoryItem {
+  category_id: number;
+  description: string;
+  name:        string;
+  url?:        string;
+  slug?:       string;
+  ProductCategory: ProductCategory[];
  }
  
  export interface Category {
   category_id: number;
   description: string;
   name:        string;
+  url?:        string;
+  slug?:       string;
+  ProductCategory: ProductCategory[];
+
  }
  

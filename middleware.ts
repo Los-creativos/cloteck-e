@@ -9,7 +9,9 @@ export default async function middleware (request: NextRequest) {
   if (pathname.startsWith('/admin')) {
     const token = await getTokenCookie()    
     const data = await VerifyJwt(token?.value as string) as Customer
-    
+    //TODO: averiguar sobre los tipos de tokens que se envian al front
+    //TODO: enum
+    //TODO: poner en el env
     if (data) {
       if (data.type_user === 'Admin') {
         return NextResponse.next()

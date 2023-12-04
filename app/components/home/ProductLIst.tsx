@@ -3,31 +3,38 @@ import ProductCard from './ProductCard';
 import React, { useEffect, useState } from 'react';
 import { Product } from '@/app/types';
 
-export default function ProductList() {
-  const [products, setProducts] = useState<Product[]>([]);
+interface ProductListProps {
+  products?: Product[]; // Optional, if provided, use this instead of fetching
+  limit?: number; 
+}
+
+export default function ProductList({ products: initialProducts, limit }: ProductListProps) {
+  const [products, setProducts] = useState<Product[]>(initialProducts || []);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('/api/products');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+    if (!initialProducts) {
+      setLoading(true);
+      const fetchProducts = async () => {
+        try {
+          const response = await fetch('/api/products');
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const data = await response.json();
+          setProducts(data);
+        } catch (error: any) {
+          console.error('Error fetching products:', error);
+          setError(error.message);
+        } finally {
+          setLoading(false);
         }
-        const data = await response.json();
-        setProducts(data);
-      } catch (error: any) {
-        console.error('Error fetching products:', error);
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
-    fetchProducts();
-  }, []);
+      fetchProducts();
+    }
+  }, [initialProducts]);
 
   if (isLoading) {
     return <div className='container justify-center text-3xl'>Loading products...</div>;
@@ -37,7 +44,7 @@ export default function ProductList() {
     return <div className='container justify-center text-3xl'>Error fetching products: {error}</div>;
   }
 
-  const productsToShow = products.slice(0, 6);
+  const productsToShow = limit ? products.slice(0, limit) : products;
 
   return (
     <div className='flex items-center justify-center my-4'>
