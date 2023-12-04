@@ -2,10 +2,11 @@
 import { useParams, useSearchParams } from 'next/navigation';
 import ProductList from '@/app/components/home/ProductLIst';
 import { useEffect, useState } from 'react';
+import { Category } from '@/app/types';
 
 export default function CategoryPage() {
   const { slug } = useParams(); 
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState<Category | null>(null);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const categoryId = searchParams.get('id');
@@ -21,7 +22,7 @@ export default function CategoryPage() {
         })
         .catch(() => setLoading(false));
     }
-  }, [slug]);
+  }, [slug, categoryId]);
 
   if (loading) {
     return <div className='container justify-center'>Loading...</div>;

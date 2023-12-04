@@ -1,4 +1,4 @@
-export async function fetchCategoryProducts(categoryId) {
+export async function fetchCategoryProducts(categoryId: number) {
   try {
     const response = await fetch(`http://localhost:3000/api/category/${categoryId}`);
     if (!response.ok) {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { CategoryItem } from "@/app/types";
 
 async function getCollectionData() {
   const res = await fetch("http://localhost:3000/api/category");
@@ -36,7 +36,7 @@ async function CollectionPage () {
     }
   ]
 
-    collections.forEach((category) => {
+    collections.forEach((category: CategoryItem) => {
     const imageURL = imageURLs.find((image) => image.category_id === category.category_id); 
     const slug = category.name.toLowerCase().replace(/\s/g, '-');
     category.url = imageURL ? imageURL.url : ''; 
@@ -49,11 +49,11 @@ async function CollectionPage () {
       <h1 className="text-4xl font-bold text-center mt-10">Collections</h1>
       <div className="mx-auto mb-12 flex justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {collections.map((collection) => (
+          {collections.map((collection:CategoryItem) => (
             <div key={collection.slug} id='alink' className="transform transition duration-300 hover:scale-105 m-5">
               <Link href={`/collections/${collection.slug}?id=${collection.category_id}`}>
                  <Image
-                    src={collection.url}
+                    src={collection.url || "https://via.placeholder.com/350x350"}
                     alt={collection.name}
                     width={350} 
                     height={350}
