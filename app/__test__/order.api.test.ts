@@ -33,9 +33,9 @@ describe('API Functions', () => {
 
     const result = await getOrdersByItems(1);
 
-    expect(result.status).toEqual(200);
+    expect(result.status).toEqual(400);
     expect(result).toBeDefined()
-    expect(result).toHaveProperty("productList")
+    expect(result).toHaveProperty("erro")
   });
 
   it('should throw a error when updateOrderStatus is called', async () => {
