@@ -195,6 +195,6 @@ export const clearOrders = async () => {
     });
     return {message: "Successful Clear Cart", status: 200};
   } catch (error) {
-    return NextResponse.json({ error: (error as any).errors }, { status: 500 })
+    return { error: 'An error occurred', status: 500 };
   }
 }
