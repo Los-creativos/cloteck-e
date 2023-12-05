@@ -76,10 +76,9 @@ export const getOrdersByUser = async (userID: number) => {
       throw new Error("Order Not Found")
     }
 
-    return NextResponse.json(order.order_id);
+    return {order: order, status: 200};
   } catch (error) {
-    console.error('Error', error);
-    return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
+    return { error: 'An error occurred', status: 400 };
   }
 };
 
@@ -130,10 +129,8 @@ export const getOrdersByItems = async (userID: number) => {
       }
     });
 
-    console.log("FINALMENTE LLEGUÉ SOY UN CRACK: ");
-    return productList;
+    return {productList: productList, status: 200};
   } catch (error) {
-    console.error('Error', error);
     return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
   }
 };
@@ -148,12 +145,12 @@ export const updateOrderStatus = async (orderId: number, active: boolean) => {
         active: active
       }
     })
-    return newOrder;
+    return {order: newOrder, status: 200};
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error }, { status: 400})
     }
-    return NextResponse.json({ error: (error as any).errors }, { status: 500 })
+    return { error: (error as any).errors , status: 500 }
   }
 }
 
@@ -166,12 +163,12 @@ export const updateProductOrderStatus = async (productOrderId: number, quantity:
         quantity: quantity
       }
     })
-    return newProductOrder;
+    return {product: newProductOrder, status: 200};
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error }, { status: 400})
     }
-    return NextResponse.json({ error: (error as any).errors }, { status: 500 })
+    return { error: (error as any).errors , status: 500 }
   }
 }
 
@@ -185,9 +182,9 @@ export const deleteOrderProduct = async (orderID: number, size: string, color: s
       }
     })
 
-    return NextResponse.json("Successful delete", {status: 200})
+    return {message: "Successful delete", status: 200}
   } catch (error) {
-    console.error(error)
+    return { error: (error as any).errors , status: 500 }
   }
 }
 
@@ -196,7 +193,7 @@ export const clearOrders = async () => {
     await prisma.order.deleteMany({
       where: {}
     });
-    return "Successful Clear Cart";
+    return {message: "Successful Clear Cart", status: 200};
   } catch (error) {
     return NextResponse.json({ error: (error as any).errors }, { status: 500 })
   }
