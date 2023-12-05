@@ -35,7 +35,7 @@ describe('API Functions', () => {
 
     expect(result.status).toEqual(400);
     expect(result).toBeDefined()
-    expect(result).toHaveProperty("erro")
+    expect(result).toHaveProperty("error")
   });
 
   it('should throw a error when updateOrderStatus is called', async () => {
