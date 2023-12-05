@@ -1,16 +1,13 @@
 'use server'
 
 import { prisma } from "@/lib/prisma";
-import {Prisma, Order} from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import {createOrderValidator, updateOrderValidator} from "@/app/(backend)/api/order/order.schema";
 import {OrderProduct} from "@/app/(backend)/api/order/order-dto";
 
 
 export const createOrder = async (userID: number) => {
   try {
-    //createOrderValidator.parse(input)
     const createdOrder = await prisma.order.create({
       data: {
         user_id: userID,
@@ -76,10 +73,9 @@ export const getOrdersByUser = async (userID: number) => {
       throw new Error("Order Not Found")
     }
 
-    return NextResponse.json(order.order_id);
+    return {order: order, status: 200};
   } catch (error) {
-    console.error('Error', error);
-    return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
+    return { error: 'An error occurred', status: 400 };
   }
 };
 
@@ -112,7 +108,6 @@ export const getOrdersByItems = async (userID: number) => {
         productList[index].sizes.push(orderProduct.size_name.trim());
         productList[index].quantity.push(orderProduct.quantity);
         productList[index].orderProduct.push(orderProduct.order_product_id);
-        //productList[index].stock.push(orderProduct.Product);
       } else {
         productMap.set(key, productList.length);
         productList.push({
@@ -130,17 +125,15 @@ export const getOrdersByItems = async (userID: number) => {
       }
     });
 
-    console.log("FINALMENTE LLEGUÉ SOY UN CRACK: ");
-    return productList;
+    return {productList: productList, status: 200};
   } catch (error) {
-    console.error('Error', error);
-    return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
+    return { error: 'An error occurred', status: 400 };
   }
 };
 
 export const updateOrderStatus = async (orderId: number, active: boolean) => {
   try {
-    
+
     const newOrder = await prisma.order.update({
       where: {
         order_id: orderId
@@ -148,12 +141,12 @@ export const updateOrderStatus = async (orderId: number, active: boolean) => {
         active: active
       }
     })
-    return newOrder;
+    return {order: newOrder, status: 200};
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error }, { status: 400})
     }
-    return NextResponse.json({ error: (error as any).errors }, { status: 500 })
+    return { error: (error as any).errors , status: 500 }
   }
 }
 
@@ -161,17 +154,17 @@ export const updateProductOrderStatus = async (productOrderId: number, quantity:
   try {
     const newProductOrder = await prisma.orderProduct.update({
       where: {
-        order_product_id: productOrderId 
+        order_product_id: productOrderId
       }, data: {
         quantity: quantity
       }
     })
-    return newProductOrder;
+    return {product: newProductOrder, status: 200};
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error }, { status: 400})
     }
-    return NextResponse.json({ error: (error as any).errors }, { status: 500 })
+    return { error: (error as any).errors , status: 500 }
   }
 }
 
@@ -185,9 +178,9 @@ export const deleteOrderProduct = async (orderID: number, size: string, color: s
       }
     })
 
-    return NextResponse.json("Successful delete", {status: 200})
+    return {message: "Successful delete", status: 200}
   } catch (error) {
-    console.error(error)
+    return { error: (error as any).errors , status: 500 }
   }
 }
 
@@ -196,8 +189,8 @@ export const clearOrders = async () => {
     await prisma.order.deleteMany({
       where: {}
     });
-    return "Successful Clear Cart";
+    return {message: "Successful Clear Cart", status: 200};
   } catch (error) {
-    return NextResponse.json({ error: (error as any).errors }, { status: 500 })
+    return { error: 'An error occurred', status: 500 };
   }
 }

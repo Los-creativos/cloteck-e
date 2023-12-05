@@ -44,6 +44,7 @@
     "ts-node": "^10.9.1",
     "universal-cookie": "^6.1.1",
     "uui": "^1.0.7",
+    "whatwg-fetch": "^3.6.19",
     "zod": "^3.22.4",
     "zustand": "^4.4.6"
   },
