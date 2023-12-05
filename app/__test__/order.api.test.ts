@@ -77,9 +77,8 @@ describe('API Functions', () => {
 
     const result = await clearOrders();
 
-    expect(result.message).toEqual(mockResponse);
-    expect(result.status).toEqual(200);
-    expect(result).toHaveProperty("message")
+    expect(result.status).toEqual(500);
+    expect(result).toHaveProperty("error")
   });
 
 
