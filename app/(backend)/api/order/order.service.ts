@@ -1,16 +1,13 @@
 'use server'
 
 import { prisma } from "@/lib/prisma";
-import {Prisma, Order} from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import {createOrderValidator, updateOrderValidator} from "@/app/(backend)/api/order/order.schema";
 import {OrderProduct} from "@/app/(backend)/api/order/order-dto";
 
 
 export const createOrder = async (userID: number) => {
   try {
-    //createOrderValidator.parse(input)
     const createdOrder = await prisma.order.create({
       data: {
         user_id: userID,
@@ -111,7 +108,6 @@ export const getOrdersByItems = async (userID: number) => {
         productList[index].sizes.push(orderProduct.size_name.trim());
         productList[index].quantity.push(orderProduct.quantity);
         productList[index].orderProduct.push(orderProduct.order_product_id);
-        //productList[index].stock.push(orderProduct.Product);
       } else {
         productMap.set(key, productList.length);
         productList.push({
@@ -131,7 +127,7 @@ export const getOrdersByItems = async (userID: number) => {
 
     return {productList: productList, status: 200};
   } catch (error) {
-    return NextResponse.json({ error: 'An error occurred' }, { status: 400 });
+    return { error: 'An error occurred', status: 400 };
   }
 };
 
